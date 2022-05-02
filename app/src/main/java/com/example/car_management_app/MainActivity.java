@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
             public Unit invoke(OAuthToken oAuthToken, Throwable throwable) {
                 if(oAuthToken != null){
                     //TBD
+
                 }
                 if(throwable != null){
                     //TBD
