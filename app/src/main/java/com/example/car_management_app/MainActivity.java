@@ -37,8 +37,6 @@ public class MainActivity extends AppCompatActivity {
         nickName = findViewById(R.id.nickname);
         profileImage = findViewById(R.id.profile);
 
-
-
         Function2<OAuthToken, Throwable, Unit> callback = new Function2<OAuthToken, Throwable, Unit>() {
             @Override
             public Unit invoke(OAuthToken oAuthToken, Throwable throwable) {
@@ -89,6 +87,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public Unit invoke(User user, Throwable throwable) {
                 if(user != null){
+                    SharedPrefs.saveSharedSetting(MainActivity.this, "CaptainCode", "false");
+
+                    Intent intent = new Intent(MainActivity.this, Car_Select_Activity.class);
+                    String sName = nickName.getText().toString().trim();
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.putExtra("Name",sName);
+                    startActivity(intent);
+
+                    finish();
+
+                    nickName.setText(user.getKakaoAccount().getProfile().getNickname());
 
                     Log.i(TAG, "invoke: id=" + user.getId());
                     Log.i(TAG, "invoke: email=" + user.getKakaoAccount().getEmail());
@@ -96,18 +105,12 @@ public class MainActivity extends AppCompatActivity {
                     Log.i(TAG, "invoke: gender=" + user.getKakaoAccount().getGender());
                     Log.i(TAG, "invoke: age=" + user.getKakaoAccount().getAgeRange());
 
-                    nickName.setText(user.getKakaoAccount().getProfile().getNickname());
                     Glide.with(profileImage).load(user.getKakaoAccount().getProfile().getThumbnailImageUrl()).circleCrop().into(profileImage);
 
                     loginButton.setVisibility(View.GONE);
                     logoutButton.setVisibility(View.VISIBLE);
 
-                    Intent intent = new Intent(MainActivity.this, Car_Select_Activity.class);
-                    String sName = nickName.getText().toString().trim();
-                    Log.d("rname", sName);
-                    intent.putExtra("Name",sName);
 
-                    startActivity(intent);
                 }
                 else{
                     nickName.setText(null);
