@@ -31,6 +31,8 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        Log.d("Check3", "hello");
+
         loginButton = findViewById(R.id.login);
         logoutButton = findViewById(R.id.logout);
         nickName = findViewById(R.id.nickname);
@@ -87,8 +89,32 @@ public class LoginActivity extends AppCompatActivity {
             public Unit invoke(User user, Throwable throwable) {
                 if(user != null){
                     SharedPrefs.saveSharedSetting(LoginActivity.this, "CaptainCode", "false");
+
+                    Log.i(TAG, "invoke: id=" + user.getId());
+                    Log.i(TAG, "invoke: email=" + user.getKakaoAccount().getEmail());
+                    Log.i(TAG, "invoke: nickname=" + user.getKakaoAccount().getProfile().getNickname());
+                    Log.i(TAG, "invoke: gender=" + user.getKakaoAccount().getGender());
+                    Log.i(TAG, "invoke: age=" + user.getKakaoAccount().getAgeRange());
+
+                    nickName.setText(user.getKakaoAccount().getProfile().getNickname());
+                    Glide.with(profileImage).load(user.getKakaoAccount().getProfile().getThumbnailImageUrl()).circleCrop().into(profileImage);
+
+                    loginButton.setVisibility(View.GONE);
+                    logoutButton.setVisibility(View.VISIBLE);
+
+                    Intent intent = new Intent(LoginActivity.this, Car_Select_Activity.class);
+                    String sName = nickName.getText().toString().trim();
+                    Log.d("rname", sName);
+                    intent.putExtra("Name",sName);
+
+                    startActivity(intent);
+
                 }
                 else{
+                    nickName.setText(null);
+                    profileImage.setImageBitmap(null);
+                    loginButton.setVisibility(View.VISIBLE);
+                    logoutButton.setVisibility(View.GONE);
 
                 }
                 if (throwable != null) {

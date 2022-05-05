@@ -34,6 +34,8 @@ public class Frag1 extends Fragment {
 
         textView = v.findViewById(R.id.textView32);
 
+        Log.d("MainActivity", "adsd");
+
         /*databaseReference.child("Car_Management").child("정승규").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

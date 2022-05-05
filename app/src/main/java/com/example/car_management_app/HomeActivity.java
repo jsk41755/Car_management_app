@@ -67,6 +67,7 @@ public class HomeActivity extends AppCompatActivity {
         introIntent.putExtra("CaptainCode", Check);
         //The Value if you click on Login Activity and Set the value is FALSE and whe false the activity will be visible
         if (Check) {
+            Log.d("Check", String.valueOf(Check));
             startActivity(introIntent);
             finish();
         } //If no the Main Activity not Do Anything

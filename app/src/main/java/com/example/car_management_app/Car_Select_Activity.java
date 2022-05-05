@@ -126,6 +126,7 @@ public class Car_Select_Activity extends AppCompatActivity {
 
         //The Value if you click on Login Activity and Set the value is FALSE and whe false the activity will be visible
         if (Check) {
+            Log.d("Check2", String.valueOf(Check));
             startActivity(introIntent);
             finish();
         } //If no the Main Activity not Do Anything
