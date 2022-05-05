@@ -1,5 +1,7 @@
 package com.example.car_management_app;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,12 +21,19 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.kakao.sdk.auth.model.OAuthToken;
+import com.kakao.sdk.user.UserApiClient;
+import com.kakao.sdk.user.model.User;
+
+import kotlin.Unit;
+import kotlin.jvm.functions.Function2;
 
 public class Frag1 extends Fragment {
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference = database.getReference();
 
     TextView textView;
+    public static String kakaoID;//태인아 이게 카카오 닉네임 값이야
 
     @Nullable
     @Override
@@ -34,20 +43,27 @@ public class Frag1 extends Fragment {
 
         textView = v.findViewById(R.id.textView32);
 
-        Log.d("MainActivity", "adsd");
-
-        /*databaseReference.child("Car_Management").child("정승규").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String value = dataSnapshot.getValue(String.class);
-                textView.setText(value);
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                //Log.e("MainActivity", String.valueOf(databaseError.toException())); // 에러문 출력
-            }
-        });*/
+        updateKakaoLoginUi();
 
         return v;
+    }
+
+    private void updateKakaoLoginUi() {
+        UserApiClient.getInstance().me(new Function2<User, Throwable, Unit>() {
+            @Override
+            public Unit invoke(User user, Throwable throwable) {
+                if(user != null){
+                    kakaoID = user.getKakaoAccount().getProfile().getNickname();
+                    Log.d("이거 카카오 닉네임", kakaoID);
+                }
+                else{
+
+                }
+                if (throwable != null) {
+                    Log.w(TAG, "invoke: " + throwable.getLocalizedMessage());
+                }
+                return null;
+            }
+        });
     }
 }
