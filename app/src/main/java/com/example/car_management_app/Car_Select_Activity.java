@@ -136,7 +136,7 @@ public class Car_Select_Activity extends AppCompatActivity {
         Car_Select_Helper car_select = new Car_Select_Helper(isSelect, Oil);
 
         databaseReference.child("Car_Management").child(kakaoID).child("1").child("Oil").setValue(Oil);
-        Intent intent2 = new Intent(Car_Select_Activity.this, HomeActivity.class);
+        Intent intent2 = new Intent(Car_Select_Activity.this, Car_Number_Reigst.class);
         intent2.putExtra("Name",kakaoID);
         startActivity(intent2);
     }

@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Car_Management_App">
         <activity
+            android:name=".Car_Number_Reigst"
+            android:exported="false" />
+        <activity
             android:name=".Frag3"
             android:exported="false" />
         <activity
