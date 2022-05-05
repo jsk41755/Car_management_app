@@ -3,7 +3,6 @@ package com.example.car_management_app;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -20,7 +19,7 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 
-public class MainActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
 
     private View loginButton, logoutButton;
@@ -30,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
 
         loginButton = findViewById(R.id.login);
         logoutButton = findViewById(R.id.logout);
@@ -55,12 +54,12 @@ public class MainActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(UserApiClient.getInstance().isKakaoTalkLoginAvailable(MainActivity.this)){
-                    UserApiClient.getInstance().loginWithKakaoTalk(MainActivity.this, callback);
+                if(UserApiClient.getInstance().isKakaoTalkLoginAvailable(LoginActivity.this)){
+                    UserApiClient.getInstance().loginWithKakaoTalk(LoginActivity.this, callback);
                 }
                 else{
-                    UserApiClient.getInstance().loginWithKakaoAccount(MainActivity.this, callback);
-                    String keyHash = Utility.INSTANCE.getKeyHash(MainActivity.this);
+                    UserApiClient.getInstance().loginWithKakaoAccount(LoginActivity.this, callback);
+                    String keyHash = Utility.INSTANCE.getKeyHash(LoginActivity.this);
                     Log.i(TAG, "onCreate: keyHash:" + keyHash);
                 }
             }
@@ -87,36 +86,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public Unit invoke(User user, Throwable throwable) {
                 if(user != null){
-                    SharedPrefs.saveSharedSetting(MainActivity.this, "CaptainCode", "false");
-
-                    Intent intent = new Intent(MainActivity.this, Car_Select_Activity.class);
-                    String sName = nickName.getText().toString().trim();
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    intent.putExtra("Name",sName);
-                    startActivity(intent);
-
-                    finish();
-
-                    nickName.setText(user.getKakaoAccount().getProfile().getNickname());
-
-                    Log.i(TAG, "invoke: id=" + user.getId());
-                    Log.i(TAG, "invoke: email=" + user.getKakaoAccount().getEmail());
-                    Log.i(TAG, "invoke: nickname=" + user.getKakaoAccount().getProfile().getNickname());
-                    Log.i(TAG, "invoke: gender=" + user.getKakaoAccount().getGender());
-                    Log.i(TAG, "invoke: age=" + user.getKakaoAccount().getAgeRange());
-
-                    Glide.with(profileImage).load(user.getKakaoAccount().getProfile().getThumbnailImageUrl()).circleCrop().into(profileImage);
-
-                    loginButton.setVisibility(View.GONE);
-                    logoutButton.setVisibility(View.VISIBLE);
-
-
+                    SharedPrefs.saveSharedSetting(LoginActivity.this, "CaptainCode", "false");
                 }
                 else{
-                    nickName.setText(null);
-                    profileImage.setImageBitmap(null);
-                    loginButton.setVisibility(View.VISIBLE);
-                    logoutButton.setVisibility(View.GONE);
+
                 }
                 if (throwable != null) {
                     Log.w(TAG, "invoke: " + throwable.getLocalizedMessage());

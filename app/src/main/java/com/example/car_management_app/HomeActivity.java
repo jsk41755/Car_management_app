@@ -1,6 +1,7 @@
 package com.example.car_management_app;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
@@ -26,6 +27,12 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        Toolbar mToolbar = (Toolbar) findViewById(R.id.main_toolbar);
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        CekSession();
+
         tabLayout=findViewById(R.id.tabs);
         viewPager=findViewById(R.id.view_pager);
         adapter=new FragmentAdapter(getSupportFragmentManager(),1);
@@ -50,9 +57,18 @@ public class HomeActivity extends AppCompatActivity {
         tabLayout.getTabAt(4).setText("다섯 번째");
 
         Intent intent = getIntent();
-        Log.d("tname", intent.getStringExtra("Name"));
+        //Log.d("tname", intent.getStringExtra("Name"));
+    }
 
-        textView = findViewById(R.id.textView2);
-        textView.setText(intent.getStringExtra("Name"));
+    private void CekSession() {
+        Boolean Check = Boolean.valueOf(SharedPrefs2.readSharedSetting(HomeActivity.this, "CaptainCode", "true"));
+
+        Intent introIntent = new Intent(HomeActivity.this, Car_Select_Activity.class);
+        introIntent.putExtra("CaptainCode", Check);
+        //The Value if you click on Login Activity and Set the value is FALSE and whe false the activity will be visible
+        if (Check) {
+            startActivity(introIntent);
+            finish();
+        } //If no the Main Activity not Do Anything
     }
 }
