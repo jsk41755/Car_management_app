@@ -10,10 +10,14 @@ import androidx.fragment.app.Fragment;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -33,6 +37,8 @@ public class Frag1 extends Fragment {
     private DatabaseReference databaseReference = database.getReference();
 
     TextView textView;
+    EditText textEdit;
+    String TempText, Text;
     public static String kakaoID;//태인아 이게 카카오 닉네임 값이야
 
     @Nullable
@@ -42,9 +48,46 @@ public class Frag1 extends Fragment {
         View v=inflater.inflate(R.layout.activity_tab1_fragment,container,false);
 
         textView = v.findViewById(R.id.textView32);
+        textEdit = v.findViewById(R.id.editTextTextPersonName2);
+        updateKakaoLoginUi(); //실행시간동안 다른 코드 실행 중지 받아오는게 느려서 다른코드 실행 불가
 
-        updateKakaoLoginUi();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                databaseReference.child("Car_Management").child(kakaoID).child("1").child("memo").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        TempText = snapshot.getValue(String.class);
+                        textEdit.setText(TempText);
+                    }
 
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+                textEdit.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                    }
+
+                    @Override
+                    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                        Text = textEdit.getText().toString();
+                        databaseReference.child("Car_Management").child(kakaoID).child("1").child("memo").setValue(Text);
+                    }
+
+                    @Override
+                    public void afterTextChanged(Editable editable) {
+
+                    }
+                });
+
+
+            }
+        }, 300);
         return v;
     }
 
@@ -66,4 +109,5 @@ public class Frag1 extends Fragment {
             }
         });
     }
+
 }
