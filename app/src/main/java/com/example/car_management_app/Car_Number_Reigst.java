@@ -61,7 +61,7 @@ public class Car_Number_Reigst extends AppCompatActivity {
                 CarNum = CarNum_Edit.getText().toString();
                 databaseReference.child("Car_Management").child(KakaoId).child("1").child("Car_Information").child("Car_number").setValue(CarNum);
                 databaseReference.child("Car_Management").child(KakaoId).child("1").child("Car_Information").child("Car_Kinds").setValue(Spinner_text);
-
+                databaseReference.child("Car_Management").child(KakaoId).child("1").child("memo").setValue(null);
                 Intent intent2 = new Intent(Car_Number_Reigst.this, HomeActivity.class);
                 startActivity(intent2);
             }
