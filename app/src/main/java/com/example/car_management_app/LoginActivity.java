@@ -24,7 +24,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private View loginButton, logoutButton;
     private TextView nickName;
-    private ImageView profileImage;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +36,7 @@ public class LoginActivity extends AppCompatActivity {
         loginButton = findViewById(R.id.login);
         logoutButton = findViewById(R.id.logout);
         nickName = findViewById(R.id.nickname);
-        profileImage = findViewById(R.id.profile);
+
 
         Function2<OAuthToken, Throwable, Unit> callback = new Function2<OAuthToken, Throwable, Unit>() {
             @Override
@@ -97,7 +97,7 @@ public class LoginActivity extends AppCompatActivity {
                     Log.i(TAG, "invoke: age=" + user.getKakaoAccount().getAgeRange());
 
                     nickName.setText(user.getKakaoAccount().getProfile().getNickname());
-                    Glide.with(profileImage).load(user.getKakaoAccount().getProfile().getThumbnailImageUrl()).circleCrop().into(profileImage);
+
 
                     loginButton.setVisibility(View.GONE);
                     logoutButton.setVisibility(View.VISIBLE);
@@ -112,7 +112,6 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 else{
                     nickName.setText(null);
-                    profileImage.setImageBitmap(null);
                     loginButton.setVisibility(View.VISIBLE);
                     logoutButton.setVisibility(View.GONE);
 
