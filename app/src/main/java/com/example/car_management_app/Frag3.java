@@ -28,6 +28,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
@@ -124,7 +125,6 @@ public class Frag3 extends Fragment {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         tableLayout = (TableLayout) v.findViewById(R.id.tableLayout);
-                        int num = 0;
                         for(DataSnapshot dataSnapshot : snapshot.getChildren()){
                             for(DataSnapshot dataSnapshot2 : dataSnapshot.getChildren()) {
                                 TableRow tableRow = new TableRow(v.getContext());
@@ -143,7 +143,17 @@ public class Frag3 extends Fragment {
                                     }
                                     if(j==1){
                                         TextView textView = new TextView(v.getContext());
-                                        textView.setText(dataSnapshot2.getKey());
+                                        if(dataSnapshot2.getKey().equals("EngineOil")){
+                                            textView.setText("엔진오일");
+                                        }
+                                        else if(dataSnapshot2.getKey().equals("CoolingWater")){
+                                            textView.setText("냉각수");
+                                        }
+                                        else if(dataSnapshot2.getKey().equals("CarWash")){
+                                            textView.setText("세차");
+                                        }
+                                        else
+                                            textView.setText("옴뇽뇽뇽");
                                         textView.setTextSize(15);
                                         textView.setTextColor(Color.parseColor("#000000"));
                                         textView.setGravity(Gravity.CENTER);
@@ -162,41 +172,78 @@ public class Frag3 extends Fragment {
                                         ((ViewGroup) tableRow.getParent()).removeView(tableRow);
                                     tableLayout.addView(tableRow);
                                 }
-                                jsonList.add(String.valueOf((dataSnapshot2.getKey())));
-                                visitors.add(new BarEntry(num, Float.parseFloat(String.valueOf(dataSnapshot2.getValue()))));
-                                num += 1;
                             }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+            }
+        }, 300);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                databaseReference.child(kakaoID).child("1").child("Supplies").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        int num = 0;
+                        for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                            int sum = 0;
+                            jsonList.add((dataSnapshot.getKey())+ "월");
+                            for(DataSnapshot dataSnapshot2 : dataSnapshot.getChildren()) {
+                                int sum2 = 0;
+                                for(DataSnapshot dataSnapshot3 : dataSnapshot2.getChildren()) {
+                                    sum2 += Float.parseFloat(String.valueOf(dataSnapshot3.getValue()));
+                                }
+                                sum += sum2;
+                            }
+                            visitors.add(new BarEntry(num, sum));
+                            num += 1;
                         }
                         BarDataSet barDataSet = new BarDataSet(visitors, "");
                         barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
                         barDataSet.setValueTextColor(Color.BLACK);
-                        barDataSet.setValueTextSize(12);
+                        barDataSet.setValueTextSize(20);
 
                         BarData barData = new BarData(barDataSet);
 
                         barChart.setData(barData);
-                        description.setText("인위적 요인");
 
                         barChart.setDescription(null);
                         barChart.animateY(2000);
 
+                        barChart.setTouchEnabled(false);
                         XAxis xAxis = barChart.getXAxis();
                         xAxis.setValueFormatter(new IndexAxisValueFormatter(jsonList));
-                        xAxis.setDrawGridLines(true);
+                        xAxis.setDrawGridLines(false);
                         xAxis.setDrawAxisLine(false);
-                        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM_INSIDE);
+                        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
                         xAxis.setGranularity(1f);
-                        xAxis.setTextSize(7f);
+                        xAxis.setTextSize(10f);
+                        xAxis.setDrawAxisLine(false);
                         xAxis.setLabelCount(visitors.size());
                         xAxis.setGranularityEnabled(true);
 
-                        barChart.setDragEnabled(true);
-                        barChart.setVisibleXRangeMaximum(5);
+                        YAxis yAxisRight = barChart.getAxisLeft(); //Y축의 오른쪽면 설정
+                        yAxisRight.setDrawLabels(false);
+                        yAxisRight.setDrawAxisLine(false);
+                        yAxisRight.setDrawGridLines(false);
+                        yAxisRight.setStartAtZero(true);
+
+                        Legend legend = barChart.getLegend();
+                        legend.setEnabled(false);
+
+                        barChart.setDragEnabled(false);
+                        barChart.setVisibleXRangeMaximum(3);
 
                         float barSpace = 0.1f;
                         float groupSpace = 0.5f;
 
-                        barData.setBarWidth(0.8f);
+                        barData.setBarWidth(0.6f);
 
                         barChart.invalidate();
 
@@ -212,6 +259,7 @@ public class Frag3 extends Fragment {
 
         return v;
     }
+
 
     private void BarChartGraph(ArrayList<String> labelList, ArrayList<Integer> valList) {
         ArrayList<BarEntry> entries = new ArrayList<>();
