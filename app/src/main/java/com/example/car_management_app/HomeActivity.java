@@ -50,11 +50,18 @@ public class HomeActivity extends AppCompatActivity {
         //ViewPager과 TabLayout 연결
         tabLayout.setupWithViewPager(viewPager);
 
-        tabLayout.getTabAt(0).setText("첫 번째");
-        tabLayout.getTabAt(1).setText("두 번째");
-        tabLayout.getTabAt(2).setText("세 번째");
-        tabLayout.getTabAt(3).setText("네 번째");
-        tabLayout.getTabAt(4).setText("다섯 번째");
+        tabLayout.getTabAt(0).setText("홈");
+        tabLayout.getTabAt(1).setText("차량정보");
+        tabLayout.getTabAt(2).setText("카계부");
+        tabLayout.getTabAt(3).setText("지도");
+        tabLayout.getTabAt(4).setText("용품");
+
+        //tabLayout에 아이콘 설정 부분
+        tabLayout.getTabAt(0).setIcon(R.drawable.home_icon);
+        tabLayout.getTabAt(1).setIcon(R.drawable.book_icon);
+        tabLayout.getTabAt(2).setIcon(R.drawable.chart_icon);
+        tabLayout.getTabAt(3).setIcon(R.drawable.map_icon);
+        tabLayout.getTabAt(4).setIcon(R.drawable.cart_icon);
 
         Intent intent = getIntent();
         //Log.d("tname", intent.getStringExtra("Name"));
