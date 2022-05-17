@@ -39,7 +39,7 @@ public class Frag1 extends Fragment {
     TextView textView;
     EditText textEdit;
     String TempText, Text;
-    public static String kakaoID;//태인아 이게 카카오 닉네임 값이야
+    public static String kakaoID;
 
     @Nullable
     @Override

@@ -30,7 +30,8 @@
         <Spinner
             android:id="@+id/spinner"
             android:layout_width="130dp"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_spinner"/>
 
         <EditText
             android:id="@+id/editTextTextPersonName"

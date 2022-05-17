@@ -152,6 +152,15 @@ public class Frag3 extends Fragment {
                                         else if(dataSnapshot2.getKey().equals("CarWash")){
                                             textView.setText("세차");
                                         }
+                                        else if(dataSnapshot2.getKey().equals("Wiper_blade")){
+                                            textView.setText("와이퍼 블레이드");
+                                        }
+                                        else if(dataSnapshot2.getKey().equals("Airconditioner_filter")){
+                                            textView.setText("에어컨 필터");
+                                        }
+                                        else if(dataSnapshot2.getKey().equals("BreakOil")){
+                                            textView.setText("브레이크 오일");
+                                        }
                                         else
                                             textView.setText("옴뇽뇽뇽");
                                         textView.setTextSize(15);
@@ -261,32 +270,8 @@ public class Frag3 extends Fragment {
     }
 
 
-    private void BarChartGraph(ArrayList<String> labelList, ArrayList<Integer> valList) {
-        ArrayList<BarEntry> entries = new ArrayList<>();
-        for (int i = 0; i < valList.size(); i++) {
-            entries.add(new BarEntry((Integer) valList.get(i), i));
-        }
-
-        BarDataSet depenses = new BarDataSet(entries, "일일 사용시간"); // 변수로 받아서 넣어줘도 됨
-        depenses.setAxisDependency(YAxis.AxisDependency.LEFT);
-        barChart.setDescription(null);
-
-        ArrayList<String> labels = new ArrayList<String>();
-        for (int i = 0; i < labelList.size(); i++) {
-            labels.add((String) labelList.get(i));
-        }
-
-        BarData data = new BarData(depenses); // 라이브러리 v3.x 사용하면 에러 발생함
-        depenses.setColors(ColorTemplate.LIBERTY_COLORS); //
-
-        barChart.setData(data);
-        barChart.animateXY(1000, 1000);
-        barChart.invalidate();
-    }
-
-
     private void initspinnerfooter() {
-        String[] items = new String[]{"엔진오일","세차","냉각수","앙귀모링"};
+        String[] items = new String[]{"엔진오일","세차","냉각수","와이퍼 블레이드","에어컨 필터","브레이크 오일"};
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, items);
         spinner.setAdapter(adapter);
@@ -302,6 +287,15 @@ public class Frag3 extends Fragment {
                 }
                  else if(spinner.getSelectedItem().toString() == "냉각수"){
                      Spinner_text = "CoolingWater";
+                 }
+                 else if(spinner.getSelectedItem().toString() == "와이퍼 블레이드"){
+                     Spinner_text = "Wiper_blade";
+                 }
+                 else if(spinner.getSelectedItem().toString() == "에어컨 필터"){
+                     Spinner_text = "Airconditioner_filter";
+                 }
+                 else if(spinner.getSelectedItem().toString() == "브레이크 오일"){
+                     Spinner_text = "BreakOil";
                  }
                  else{
                      Spinner_text = "CarWash";

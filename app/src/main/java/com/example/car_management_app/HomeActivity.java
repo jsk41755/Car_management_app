@@ -63,8 +63,6 @@ public class HomeActivity extends AppCompatActivity {
         tabLayout.getTabAt(3).setIcon(R.drawable.map_icon);
         tabLayout.getTabAt(4).setIcon(R.drawable.cart_icon);
 
-        Intent intent = getIntent();
-        //Log.d("tname", intent.getStringExtra("Name"));
     }
 
     private void CekSession() {
