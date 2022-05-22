@@ -82,7 +82,8 @@ public class Frag3 extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.activity_tab3_fragment,container,false);
-
+        Bundle kakaoIDbundle = getArguments();
+        kakaoID = kakaoIDbundle.getString("Name");
         spinner = v.findViewById(R.id.spinner);
         editText = v.findViewById(R.id.editTextTextPersonName);
         button = v.findViewById(R.id.button12);
@@ -107,9 +108,9 @@ public class Frag3 extends Fragment {
         time.setText(getTime);
 
         initspinnerfooter();
-        updateKakaoLoginUi();
+        //updateKakaoLoginUi();
 
-
+        Log.d("카카오","시간체크3");
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -117,155 +118,143 @@ public class Frag3 extends Fragment {
                 databaseReference.child(kakaoID).child("1").child("Supplies").child(getMonth).child(getDay).child(Spinner_text).setValue(edittext);
             }
         });
-
-        new Handler().postDelayed(new Runnable() {
+        databaseReference.child(kakaoID).child("1").child("Supplies").child(getMonth).addValueEventListener(new ValueEventListener() {
             @Override
-            public void run() {
-                databaseReference.child(kakaoID).child("1").child("Supplies").child(getMonth).addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        tableLayout = (TableLayout) v.findViewById(R.id.tableLayout);
-                        for(DataSnapshot dataSnapshot : snapshot.getChildren()){
-                            for(DataSnapshot dataSnapshot2 : dataSnapshot.getChildren()) {
-                                TableRow tableRow = new TableRow(v.getContext());
-                                tableRow.setLayoutParams(new TableRow.LayoutParams(
-                                        ViewGroup.LayoutParams.WRAP_CONTENT,
-                                        ViewGroup.LayoutParams.WRAP_CONTENT));
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                tableLayout = (TableLayout) v.findViewById(R.id.tableLayout);
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    for(DataSnapshot dataSnapshot2 : dataSnapshot.getChildren()) {
+                        TableRow tableRow = new TableRow(v.getContext());
+                        tableRow.setLayoutParams(new TableRow.LayoutParams(
+                                ViewGroup.LayoutParams.WRAP_CONTENT,
+                                ViewGroup.LayoutParams.WRAP_CONTENT));
 
-                                for(int j = 0; j < 3; j++){
-                                    if(j == 0) {
-                                        TextView textView = new TextView(v.getContext());
-                                        textView.setText(snapshot.getKey() + " " + dataSnapshot.getKey());
-                                        textView.setTextSize(15);
-                                        textView.setTextColor(Color.parseColor("#000000"));
-                                        textView.setGravity(Gravity.CENTER);
-                                        tableRow.addView(textView);
-                                    }
-                                    if(j==1){
-                                        TextView textView = new TextView(v.getContext());
-                                        if(dataSnapshot2.getKey().equals("EngineOil")){
-                                            textView.setText("엔진오일");
-                                        }
-                                        else if(dataSnapshot2.getKey().equals("CoolingWater")){
-                                            textView.setText("냉각수");
-                                        }
-                                        else if(dataSnapshot2.getKey().equals("CarWash")){
-                                            textView.setText("세차");
-                                        }
-                                        else if(dataSnapshot2.getKey().equals("Wiper_blade")){
-                                            textView.setText("와이퍼 블레이드");
-                                        }
-                                        else if(dataSnapshot2.getKey().equals("Airconditioner_filter")){
-                                            textView.setText("에어컨 필터");
-                                        }
-                                        else if(dataSnapshot2.getKey().equals("BreakOil")){
-                                            textView.setText("브레이크 오일");
-                                        }
-                                        else
-                                            textView.setText("옴뇽뇽뇽");
-                                        textView.setTextSize(15);
-                                        textView.setTextColor(Color.parseColor("#000000"));
-                                        textView.setGravity(Gravity.CENTER);
-                                        tableRow.addView(textView);
-                                    }
-                                    if(j==2){
-                                        TextView textView = new TextView(v.getContext());
-                                        textView.setText(dataSnapshot2.getValue().toString() + "원");
-                                        textView.setTextSize(15);
-                                        textView.setTextColor(Color.parseColor("#000000"));
-                                        textView.setGravity(Gravity.RIGHT);
-                                        tableRow.addView(textView);
-                                    }
-
-                                    if(tableRow.getParent() != null)
-                                        ((ViewGroup) tableRow.getParent()).removeView(tableRow);
-                                    tableLayout.addView(tableRow);
-                                }
+                        for(int j = 0; j < 3; j++){
+                            if(j == 0) {
+                                TextView textView = new TextView(v.getContext());
+                                textView.setText(snapshot.getKey() + " " + dataSnapshot.getKey());
+                                textView.setTextSize(15);
+                                textView.setTextColor(Color.parseColor("#000000"));
+                                textView.setGravity(Gravity.CENTER);
+                                tableRow.addView(textView);
                             }
+                            if(j==1){
+                                TextView textView = new TextView(v.getContext());
+                                if(dataSnapshot2.getKey().equals("EngineOil")){
+                                    textView.setText("엔진오일");
+                                }
+                                else if(dataSnapshot2.getKey().equals("CoolingWater")){
+                                    textView.setText("냉각수");
+                                }
+                                else if(dataSnapshot2.getKey().equals("CarWash")){
+                                    textView.setText("세차");
+                                }
+                                else if(dataSnapshot2.getKey().equals("Wiper_blade")){
+                                    textView.setText("와이퍼 블레이드");
+                                }
+                                else if(dataSnapshot2.getKey().equals("Airconditioner_filter")){
+                                    textView.setText("에어컨 필터");
+                                }
+                                else if(dataSnapshot2.getKey().equals("BreakOil")){
+                                    textView.setText("브레이크 오일");
+                                }
+                                else
+                                    textView.setText("옴뇽뇽뇽");
+                                textView.setTextSize(15);
+                                textView.setTextColor(Color.parseColor("#000000"));
+                                textView.setGravity(Gravity.CENTER);
+                                tableRow.addView(textView);
+                            }
+                            if(j==2){
+                                TextView textView = new TextView(v.getContext());
+                                textView.setText(dataSnapshot2.getValue().toString() + "원");
+                                textView.setTextSize(15);
+                                textView.setTextColor(Color.parseColor("#000000"));
+                                textView.setGravity(Gravity.RIGHT);
+                                tableRow.addView(textView);
+                            }
+
+                            if(tableRow.getParent() != null)
+                                ((ViewGroup) tableRow.getParent()).removeView(tableRow);
+                            tableLayout.addView(tableRow);
                         }
                     }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
+                }
             }
-        }, 300);
 
-        new Handler().postDelayed(new Runnable() {
             @Override
-            public void run() {
-                databaseReference.child(kakaoID).child("1").child("Supplies").addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        int num = 0;
-                        for(DataSnapshot dataSnapshot : snapshot.getChildren()){
-                            int sum = 0;
-                            jsonList.add((dataSnapshot.getKey())+ "월");
-                            for(DataSnapshot dataSnapshot2 : dataSnapshot.getChildren()) {
-                                int sum2 = 0;
-                                for(DataSnapshot dataSnapshot3 : dataSnapshot2.getChildren()) {
-                                    sum2 += Float.parseFloat(String.valueOf(dataSnapshot3.getValue()));
-                                }
-                                sum += sum2;
-                            }
-                            visitors.add(new BarEntry(num, sum));
-                            num += 1;
-                        }
-                        BarDataSet barDataSet = new BarDataSet(visitors, "");
-                        barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
-                        barDataSet.setValueTextColor(Color.BLACK);
-                        barDataSet.setValueTextSize(20);
+            public void onCancelled(@NonNull DatabaseError error) {
 
-                        BarData barData = new BarData(barDataSet);
-
-                        barChart.setData(barData);
-
-                        barChart.setDescription(null);
-                        barChart.animateY(2000);
-
-                        barChart.setTouchEnabled(false);
-                        XAxis xAxis = barChart.getXAxis();
-                        xAxis.setValueFormatter(new IndexAxisValueFormatter(jsonList));
-                        xAxis.setDrawGridLines(false);
-                        xAxis.setDrawAxisLine(false);
-                        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-                        xAxis.setGranularity(1f);
-                        xAxis.setTextSize(10f);
-                        xAxis.setDrawAxisLine(false);
-                        xAxis.setLabelCount(visitors.size());
-                        xAxis.setGranularityEnabled(true);
-
-                        YAxis yAxisRight = barChart.getAxisLeft(); //Y축의 오른쪽면 설정
-                        yAxisRight.setDrawLabels(false);
-                        yAxisRight.setDrawAxisLine(false);
-                        yAxisRight.setDrawGridLines(false);
-                        yAxisRight.setStartAtZero(true);
-
-                        Legend legend = barChart.getLegend();
-                        legend.setEnabled(false);
-
-                        barChart.setDragEnabled(false);
-                        barChart.setVisibleXRangeMaximum(3);
-
-                        float barSpace = 0.1f;
-                        float groupSpace = 0.5f;
-
-                        barData.setBarWidth(0.6f);
-
-                        barChart.invalidate();
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
             }
-        }, 300);
+        });
 
+        databaseReference.child(kakaoID).child("1").child("Supplies").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int num = 0;
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    int sum = 0;
+                    jsonList.add((dataSnapshot.getKey())+ "월");
+                    for(DataSnapshot dataSnapshot2 : dataSnapshot.getChildren()) {
+                        int sum2 = 0;
+                        for(DataSnapshot dataSnapshot3 : dataSnapshot2.getChildren()) {
+                            sum2 += Float.parseFloat(String.valueOf(dataSnapshot3.getValue()));
+                        }
+                        sum += sum2;
+                    }
+                    visitors.add(new BarEntry(num, sum));
+                    num += 1;
+                }
+                BarDataSet barDataSet = new BarDataSet(visitors, "");
+                barDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
+                barDataSet.setValueTextColor(Color.BLACK);
+                barDataSet.setValueTextSize(20);
+
+                BarData barData = new BarData(barDataSet);
+
+                barChart.setData(barData);
+
+                barChart.setDescription(null);
+                barChart.animateY(2000);
+
+                barChart.setTouchEnabled(false);
+                XAxis xAxis = barChart.getXAxis();
+                xAxis.setValueFormatter(new IndexAxisValueFormatter(jsonList));
+                xAxis.setDrawGridLines(false);
+                xAxis.setDrawAxisLine(false);
+                xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+                xAxis.setGranularity(1f);
+                xAxis.setTextSize(10f);
+                xAxis.setDrawAxisLine(false);
+                xAxis.setLabelCount(visitors.size());
+                xAxis.setGranularityEnabled(true);
+
+                YAxis yAxisRight = barChart.getAxisLeft(); //Y축의 오른쪽면 설정
+                yAxisRight.setDrawLabels(false);
+                yAxisRight.setDrawAxisLine(false);
+                yAxisRight.setDrawGridLines(false);
+                yAxisRight.setStartAtZero(true);
+
+                Legend legend = barChart.getLegend();
+                legend.setEnabled(false);
+
+                barChart.setDragEnabled(false);
+                barChart.setVisibleXRangeMaximum(3);
+
+                float barSpace = 0.1f;
+                float groupSpace = 0.5f;
+
+                barData.setBarWidth(0.6f);
+
+                barChart.invalidate();
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         return v;
     }
 
@@ -308,24 +297,5 @@ public class Frag3 extends Fragment {
                 // TODO Auto-generated method stub
             }
         });
-    }
-
-    private String updateKakaoLoginUi() {
-        UserApiClient.getInstance().me(new Function2<User, Throwable, Unit>() {
-            @Override
-            public Unit invoke(User user, Throwable throwable) {
-                if(user != null){
-                    kakaoID = user.getKakaoAccount().getProfile().getNickname();
-                }
-                else{
-
-                }
-                if (throwable != null) {
-                    Log.w(TAG, "invoke: " + throwable.getLocalizedMessage());
-                }
-                return null;
-            }
-        });
-        return kakaoID;
     }
 }

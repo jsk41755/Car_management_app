@@ -5,7 +5,9 @@ import static android.content.ContentValues.TAG;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
@@ -39,8 +41,8 @@ public class Car_Select_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_car_select);
-
-        updateKakaoLoginUi();
+        kakaoID = getIntent().getStringExtra("Name");
+        //updateKakaoLoginUi();
 
         //isSelect();
 
@@ -54,7 +56,7 @@ public class Car_Select_Activity extends AppCompatActivity {
                 if(throwable != null){
                     //TBD
                 }
-                updateKakaoLoginUi();
+                //updateKakaoLoginUi();
                 return null;
             }
         };
@@ -94,12 +96,13 @@ public class Car_Select_Activity extends AppCompatActivity {
             @Override
             public Unit invoke(User user, Throwable throwable) {
                 if(user != null){
-
+                    /*
                     Log.i(TAG, "invoke: id=" + user.getKakaoAccount().getProfile().getNickname());
                     Log.i(TAG, "invoke: email=" + user.getKakaoAccount().getEmail());
                     Log.i(TAG, "invoke: nickname=" + user.getKakaoAccount().getProfile().getNickname());
                     Log.i(TAG, "invoke: gender=" + user.getKakaoAccount().getGender());
                     Log.i(TAG, "invoke: age=" + user.getKakaoAccount().getAgeRange());
+                    */
 
                     kakaoID = user.getKakaoAccount().getProfile().getNickname();
 
@@ -138,6 +141,7 @@ public class Car_Select_Activity extends AppCompatActivity {
         databaseReference.child("Car_Management").child(kakaoID).child("1").child("Oil").setValue(Oil);
         Intent intent2 = new Intent(Car_Select_Activity.this, Car_Number_Reigst.class);
         intent2.putExtra("Name",kakaoID);
+        Log.d("카카오",kakaoID);
         startActivity(intent2);
     }
 }

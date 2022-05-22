@@ -2,7 +2,9 @@ package com.example.car_management_app;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,13 +27,16 @@ public class LoginActivity extends AppCompatActivity {
     private View loginButton, logoutButton;
     private TextView nickName;
 
+    SharedPreferences pref;
+    SharedPreferences.Editor editor;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        Log.d("Check3", "hello");
+        updateKakaoLoginUi();
+        Log.d("카카오", "시간체크");
 
         loginButton = findViewById(R.id.login);
         logoutButton = findViewById(R.id.logout);
@@ -80,7 +85,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        updateKakaoLoginUi();
+
     }
 
     private void updateKakaoLoginUi() {
@@ -89,13 +94,13 @@ public class LoginActivity extends AppCompatActivity {
             public Unit invoke(User user, Throwable throwable) {
                 if(user != null){
                     SharedPrefs.saveSharedSetting(LoginActivity.this, "CaptainCode", "false");
-
+                    /*
                     Log.i(TAG, "invoke: id=" + user.getId());
                     Log.i(TAG, "invoke: email=" + user.getKakaoAccount().getEmail());
                     Log.i(TAG, "invoke: nickname=" + user.getKakaoAccount().getProfile().getNickname());
                     Log.i(TAG, "invoke: gender=" + user.getKakaoAccount().getGender());
                     Log.i(TAG, "invoke: age=" + user.getKakaoAccount().getAgeRange());
-
+                    */
                     nickName.setText(user.getKakaoAccount().getProfile().getNickname());
 
 
@@ -105,6 +110,10 @@ public class LoginActivity extends AppCompatActivity {
                     Intent intent = new Intent(LoginActivity.this, Car_Select_Activity.class);
                     String sName = nickName.getText().toString().trim();
                     Log.d("rname", sName);
+                    pref = getSharedPreferences("pref", Activity.MODE_PRIVATE);
+                    editor = pref.edit();
+                    editor.putString("KakaoName", sName);
+                    editor.apply();
                     intent.putExtra("Name",sName);
 
                     startActivity(intent);

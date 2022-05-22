@@ -1,31 +1,59 @@
 package com.example.car_management_app;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
 import com.google.android.material.tabs.TabLayout;
+import com.kakao.sdk.user.UserApiClient;
+import com.kakao.sdk.user.model.User;
+
+import kotlin.Unit;
+import kotlin.jvm.functions.Function2;
 
 public class HomeActivity extends AppCompatActivity {
 
     private static final String TAG = "Main_Activity";
+    private SharedPreferences preferences;
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private FragmentAdapter adapter;
 
     TextView textView;
+    public static String kakaoID;
+    SharedPreferences pref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        kakaoID = getIntent().getStringExtra("Name");
+        if(kakaoID != null)
+            Log.d("카카오 이름", kakaoID);
+
+        if(kakaoID == null)
+        {
+            pref = getSharedPreferences("pref", Activity.MODE_PRIVATE);
+            String savedName = pref.getString("KakaoName", null);
+            kakaoID = savedName;
+            if (kakaoID != null)
+                Log.d("임시",kakaoID);
+        }
+
+        Bundle kakaoIDbundle = new Bundle();
+        kakaoIDbundle.putString("Name", kakaoID);
 
         Toolbar mToolbar = (Toolbar) findViewById(R.id.main_toolbar);
         setSupportActionBar(mToolbar);
@@ -37,12 +65,24 @@ public class HomeActivity extends AppCompatActivity {
         viewPager=findViewById(R.id.view_pager);
         adapter=new FragmentAdapter(getSupportFragmentManager(),1);
 
+        Fragment Fragment1 = new Frag1();
+        Fragment1.setArguments(kakaoIDbundle);
+        Fragment Fragment2 = new Frag2();
+        Fragment2.setArguments(kakaoIDbundle);
+        Fragment Fragment3 = new Frag3();
+        Fragment3.setArguments(kakaoIDbundle);
+        Fragment Fragment4 = new Frag4();
+        Fragment4.setArguments(kakaoIDbundle);
+        Fragment Fragment5 = new Frag5();
+        Fragment5.setArguments(kakaoIDbundle);
+
+
         //FragmentAdapter에 컬렉션 담기
-        adapter.addFragment(new Frag1());
-        adapter.addFragment(new Frag2());
-        adapter.addFragment(new Frag3());
-        adapter.addFragment(new Frag4());
-        adapter.addFragment(new Frag5());
+        adapter.addFragment(Fragment1);
+        adapter.addFragment(Fragment2);
+        adapter.addFragment(Fragment3);
+        adapter.addFragment(Fragment4);
+        adapter.addFragment(Fragment5);
 
         //ViewPager Fragment 연결
         viewPager.setAdapter(adapter);
@@ -77,4 +117,5 @@ public class HomeActivity extends AppCompatActivity {
             finish();
         } //If no the Main Activity not Do Anything
     }
+
 }

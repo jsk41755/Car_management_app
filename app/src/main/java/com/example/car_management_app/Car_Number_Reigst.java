@@ -3,7 +3,9 @@ package com.example.car_management_app;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -63,6 +65,10 @@ public class Car_Number_Reigst extends AppCompatActivity {
                 databaseReference.child("Car_Management").child(KakaoId).child("1").child("Car_Information").child("Car_Kinds").setValue(Spinner_text);
                 databaseReference.child("Car_Management").child(KakaoId).child("1").child("memo").setValue(null);
                 Intent intent2 = new Intent(Car_Number_Reigst.this, HomeActivity.class);
+                Log.d("차 등록", KakaoId);
+                SharedPrefs.saveSharedSetting(Car_Number_Reigst.this , "KakaoName", KakaoId);
+
+                intent2.putExtra("Name",KakaoId);
                 startActivity(intent2);
             }
         });

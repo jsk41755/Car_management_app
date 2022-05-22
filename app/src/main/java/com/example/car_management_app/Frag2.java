@@ -50,8 +50,9 @@ public class Frag2 extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.activity_tab2_fragment,container,false);
-
-        updateKakaoLoginUi();
+        Bundle kakaoIDbundle = getArguments();
+        kakaoID = kakaoIDbundle.getString("Name");
+        //updateKakaoLoginUi();
 
         Car_inspection_Dday = (TextView) v.findViewById(R.id.Car_inspection_Dday);
         EngineOil_Dday = (TextView) v.findViewById(R.id.EngineOil_Dday);
@@ -72,100 +73,71 @@ public class Frag2 extends Fragment {
         DateFormat dateFormat = new SimpleDateFormat("yyMMdd");
         Calendar cal2 = Calendar.getInstance();
 
+        databaseReference.child(kakaoID).child("1").child("Supplies").addListenerForSingleValueEvent(new ValueEventListener() {
 
-
-        new Handler().postDelayed(new Runnable() {
             @Override
-            public void run() {
-                databaseReference.child(kakaoID).child("1").child("Supplies").addListenerForSingleValueEvent(new ValueEventListener() {
-
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                            for (DataSnapshot dataSnapshot2 : dataSnapshot.getChildren()) {
-                                for (DataSnapshot dataSnapshot3 : dataSnapshot2.getChildren()) {
-                                    double day = 0;
-                                    if(dataSnapshot3.getKey().equals("EngineOil")){
-                                        cal2.set(2022, Integer.parseInt(dataSnapshot.getKey())-1, Integer.parseInt(dataSnapshot2.getKey()));
-                                        day = (cal.getTimeInMillis() - cal2.getTimeInMillis())/(24*60*60*1000);
-                                        EngineOil_filter_progress.setProgress((int) (day/365*100));
-                                        if((int)(365-day) == 365)
-                                            EngineOil_Dday.setText("오늘 교환하셨습니다.(1년 마다 교체)");
-                                        else
-                                            EngineOil_Dday.setText( (int)(365-day) + "일 남음(1년 마다 교체)");
-                                    }
-                                    else if(dataSnapshot3.getKey().equals("CoolingWater")){
-                                        cal2.set(2022, Integer.parseInt(dataSnapshot.getKey())-1, Integer.parseInt(dataSnapshot2.getKey()));
-                                        day = (cal.getTimeInMillis() - cal2.getTimeInMillis())/(24*60*60*1000);
-                                        CoolingWater_progress.setProgress((int) (day/730*100));
-                                        if((int)(365-day) == 365)
-                                            CoolingWater_Dday.setText("오늘 교환하셨습니다.(2년 마다 교체)");
-                                        else
-                                            CoolingWater_Dday.setText((int)(730-day) + "일 남음(2년 마다 교체)");
-                                    }
-                                    else if(dataSnapshot3.getKey().equals("Wiper_blade")){
-                                        cal2.set(2022, Integer.parseInt(dataSnapshot.getKey())-1, Integer.parseInt(dataSnapshot2.getKey()));
-                                        day = (cal.getTimeInMillis() - cal2.getTimeInMillis())/(24*60*60*1000);
-                                        Wiper_blade_progress.setProgress((int) (day/365*100));
-                                        if((int)(365-day) == 365)
-                                            Wiper_blade_Dday.setText("오늘 교환하셨습니다.(1년 마다 교체)");
-                                        else
-                                            Wiper_blade_Dday.setText((int)(365-day) + "일 남음(1년 마다 교체)");
-                                    }
-                                    else if(dataSnapshot3.getKey().equals("Airconditioner_filter")){
-                                        cal2.set(2022, Integer.parseInt(dataSnapshot.getKey())-1, Integer.parseInt(dataSnapshot2.getKey()));
-                                        day = (cal.getTimeInMillis() - cal2.getTimeInMillis())/(24*60*60*1000);
-                                        Airconditioner_filter_progress.setProgress((int) (day/180*100));
-                                        if((int)(365-day) == 365)
-                                            Airconditioner_filter_Dday.setText("오늘 교환하셨습니다.(6개월 마다 교체)");
-                                        else
-                                            Airconditioner_filter_Dday.setText((int)(180-day) + "일 남음(6개월 마다 교체");
-                                    }
-                                    else if(dataSnapshot3.getKey().equals("BreakOil")){
-                                        cal2.set(2022, Integer.parseInt(dataSnapshot.getKey())-1, Integer.parseInt(dataSnapshot2.getKey()));
-                                        day = (cal.getTimeInMillis() - cal2.getTimeInMillis())/(24*60*60*1000);
-                                        BreakOil_progress.setProgress((int) (day/730*100));
-                                        if((int)(365-day) == 365)
-                                            BreakOil_Dday.setText("오늘 교환하셨습니다.(1년마다 교체)");
-                                        else
-                                            BreakOil_Dday.setText((int)(730-day) + "일 남았습니다. (2년 마다 교체)");
-                                    }
-                                }
-
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    for (DataSnapshot dataSnapshot2 : dataSnapshot.getChildren()) {
+                        for (DataSnapshot dataSnapshot3 : dataSnapshot2.getChildren()) {
+                            double day = 0;
+                            if(dataSnapshot3.getKey().equals("EngineOil")){
+                                cal2.set(2022, Integer.parseInt(dataSnapshot.getKey())-1, Integer.parseInt(dataSnapshot2.getKey()));
+                                day = (cal.getTimeInMillis() - cal2.getTimeInMillis())/(24*60*60*1000);
+                                EngineOil_filter_progress.setProgress((int) (day/365*100));
+                                if((int)(365-day) == 365)
+                                    EngineOil_Dday.setText("오늘 교환하셨습니다.(1년 마다 교체)");
+                                else
+                                    EngineOil_Dday.setText( (int)(365-day) + "일 남음(1년 마다 교체)");
+                            }
+                            else if(dataSnapshot3.getKey().equals("CoolingWater")){
+                                cal2.set(2022, Integer.parseInt(dataSnapshot.getKey())-1, Integer.parseInt(dataSnapshot2.getKey()));
+                                day = (cal.getTimeInMillis() - cal2.getTimeInMillis())/(24*60*60*1000);
+                                CoolingWater_progress.setProgress((int) (day/730*100));
+                                if((int)(365-day) == 365)
+                                    CoolingWater_Dday.setText("오늘 교환하셨습니다.(2년 마다 교체)");
+                                else
+                                    CoolingWater_Dday.setText((int)(730-day) + "일 남음(2년 마다 교체)");
+                            }
+                            else if(dataSnapshot3.getKey().equals("Wiper_blade")){
+                                cal2.set(2022, Integer.parseInt(dataSnapshot.getKey())-1, Integer.parseInt(dataSnapshot2.getKey()));
+                                day = (cal.getTimeInMillis() - cal2.getTimeInMillis())/(24*60*60*1000);
+                                Wiper_blade_progress.setProgress((int) (day/365*100));
+                                if((int)(365-day) == 365)
+                                    Wiper_blade_Dday.setText("오늘 교환하셨습니다.(1년 마다 교체)");
+                                else
+                                    Wiper_blade_Dday.setText((int)(365-day) + "일 남음(1년 마다 교체)");
+                            }
+                            else if(dataSnapshot3.getKey().equals("Airconditioner_filter")){
+                                cal2.set(2022, Integer.parseInt(dataSnapshot.getKey())-1, Integer.parseInt(dataSnapshot2.getKey()));
+                                day = (cal.getTimeInMillis() - cal2.getTimeInMillis())/(24*60*60*1000);
+                                Airconditioner_filter_progress.setProgress((int) (day/180*100));
+                                if((int)(365-day) == 365)
+                                    Airconditioner_filter_Dday.setText("오늘 교환하셨습니다.(6개월 마다 교체)");
+                                else
+                                    Airconditioner_filter_Dday.setText((int)(180-day) + "일 남음(6개월 마다 교체");
+                            }
+                            else if(dataSnapshot3.getKey().equals("BreakOil")){
+                                cal2.set(2022, Integer.parseInt(dataSnapshot.getKey())-1, Integer.parseInt(dataSnapshot2.getKey()));
+                                day = (cal.getTimeInMillis() - cal2.getTimeInMillis())/(24*60*60*1000);
+                                BreakOil_progress.setProgress((int) (day/730*100));
+                                if((int)(365-day) == 365)
+                                    BreakOil_Dday.setText("오늘 교환하셨습니다.(1년마다 교체)");
+                                else
+                                    BreakOil_Dday.setText((int)(730-day) + "일 남았습니다. (2년 마다 교체)");
                             }
                         }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
 
                     }
-                });
+                }
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
             }
-        }, 300);
+        });
 
         return v;
     }
-
-    private void updateKakaoLoginUi() {
-        UserApiClient.getInstance().me(new Function2<User, Throwable, Unit>() {
-            @Override
-            public Unit invoke(User user, Throwable throwable) {
-                if(user != null){
-                    kakaoID = user.getKakaoAccount().getProfile().getNickname();
-                    Log.d("이거 카카오 닉네임", kakaoID);
-                }
-                else{
-
-                }
-                if (throwable != null) {
-                    Log.w(TAG, "invoke: " + throwable.getLocalizedMessage());
-                }
-                return null;
-            }
-        });
-    }
-
 }
