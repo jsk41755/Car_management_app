@@ -3,6 +3,8 @@
     package="com.example.car_management_app">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
     <application
         android:name=".KakaoApplication"
@@ -11,7 +13,9 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Car_Management_App">
+        android:theme="@style/Theme.Car_Management_App"
+        android:usesCleartextTraffic="true">
+        <meta-data android:name="com.kakao.sdk.AppKey" android:value="28024e75b13ddbf12969583a1027b447"/>
         <activity
             android:name=".Car_Number_Reigst"
             android:exported="false" />
