@@ -49,6 +49,7 @@ dependencies {
     //카카오 로그인
     implementation 'com.kakao.sdk:v2-user:2.9.0' // 카카오 로그인
 
+    implementation 'com.github.denzcoskun:ImageSlideshow:0.1.0'//이미지 슬라이더
 
     // Network - Retrofit & gson & okhttp3 & intercepter
     implementation('com.squareup.retrofit2:retrofit:2.8.1') {   //Retrofit

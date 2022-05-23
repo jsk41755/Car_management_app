@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Car_Management_App</string>
+
+    <string name="tip1">자동차 정기 검사 언제 해야 할까?</string>
+    <string name="tip2">자동차 검사를 받지 않는다면?</string>
+    <string name="tip3">자동차 검사 수수료는 얼마인가요?</string>
+    <string name="tip4">비탈진 좁은 길에서 \n누가 양보해야 할까?</string>
+    <string name="tip5">졸음운전은 음주운전과도 같다?!</string>
+    <string name="tip6">방향지시등 점등하셨나요? \n깜빡이를 잊지 말아주세요.</string>
+    <string name="tip7">졸음운전은 음주운전과도 같다?!</string>
+    <string name="tip8">졸음운전은 음주운전과도 같다?!</string>
+    <string name="tip9">졸음운전은 음주운전과도 같다?!</string>
+    <string name="tip10">졸음운전은 음주운전과도 같다?!</string>
 </resources>
