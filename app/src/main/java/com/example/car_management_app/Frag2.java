@@ -101,7 +101,7 @@ public class Frag2 extends Fragment {
             }
         });
 
-        databaseReference.child(kakaoID).child("1").child("Supplies").addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.child(kakaoID).child("1").child("Supplies").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()) {

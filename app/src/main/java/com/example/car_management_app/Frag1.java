@@ -80,7 +80,7 @@ public class Frag1 extends Fragment {
         DateFormat dateFormat = new SimpleDateFormat("yyMMdd");
         Calendar cal2 = Calendar.getInstance();
 
-        databaseReference.child("Car_Management").child(kakaoID).child("1").addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.child("Car_Management").child(kakaoID).child("1").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 TempText = snapshot.child("memo").getValue(String.class);
