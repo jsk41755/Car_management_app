@@ -29,6 +29,7 @@
             app:layout_constraintStart_toStartOf="parent">
 
             <TextView
+                android:id="@+id/Car_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="My Car"
@@ -36,8 +37,10 @@
                 android:textColor="@color/black" />
 
             <TextView
+                android:id="@+id/Car_Spec"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:text="ㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂㅂ"
                 android:textColor="@color/black" />
 

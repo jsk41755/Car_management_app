@@ -38,11 +38,17 @@ public class Frag2 extends Fragment {
     TextView Car_inspection_Dday, EngineOil_Dday, Airconditioner_filter_Dday, CoolingWater_Dday,
             Wiper_blade_Dday, BreakOil_Dday;
 
+    TextView Car_name, Car_Spec;
+    private static String Car_name_st, Car_Spec_st;
+
     ProgressBar Car_inspection_progress, EngineOil_filter_progress, Airconditioner_filter_progress, CoolingWater_progress,
             Wiper_blade_progress, BreakOil_progress;
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference databaseReference = database.getInstance().getReference("Car_Management");
+
+    private FirebaseDatabase car_database = FirebaseDatabase.getInstance();
+    private DatabaseReference car_databaseReference = car_database.getReference().child("Car_Spec");
 
     public static String kakaoID;
 
@@ -52,7 +58,6 @@ public class Frag2 extends Fragment {
         View v=inflater.inflate(R.layout.activity_tab2_fragment,container,false);
         Bundle kakaoIDbundle = getArguments();
         kakaoID = kakaoIDbundle.getString("Name");
-        //updateKakaoLoginUi();
 
         Car_inspection_Dday = (TextView) v.findViewById(R.id.Car_inspection_Dday);
         EngineOil_Dday = (TextView) v.findViewById(R.id.EngineOil_Dday);
@@ -60,6 +65,9 @@ public class Frag2 extends Fragment {
         CoolingWater_Dday = (TextView) v.findViewById(R.id.CoolingWater_Dday);
         Wiper_blade_Dday = (TextView) v.findViewById(R.id.Wiper_blade_Dday);
         BreakOil_Dday = (TextView) v.findViewById(R.id.BreakOil_Dday);
+
+        Car_name = v.findViewById(R.id.Car_name);
+        Car_Spec = v.findViewById(R.id.Car_Spec);
 
         Car_inspection_progress = (ProgressBar) v.findViewById(R.id.Car_inspection_progress);
         EngineOil_filter_progress = (ProgressBar) v.findViewById(R.id.EngineOil_filter_progress);
@@ -73,8 +81,27 @@ public class Frag2 extends Fragment {
         DateFormat dateFormat = new SimpleDateFormat("yyMMdd");
         Calendar cal2 = Calendar.getInstance();
 
-        databaseReference.child(kakaoID).child("1").child("Supplies").addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.child(kakaoID).child("1").child("Car_Information").child("Car_Kinds").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.getValue().equals("쏘렌토")){
+                    Car_name.setText("쏘렌토");
+                    Car_name_st = "Sorento";
+                }
+                else if(snapshot.getValue().equals("팰리세이드")){
+                    Car_name.setText("팰리세이드");
+                    Car_name_st = "Palisade";
+                }
+                Car_information(Car_name_st);
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        databaseReference.child(kakaoID).child("1").child("Supplies").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
@@ -139,5 +166,22 @@ public class Frag2 extends Fragment {
         });
 
         return v;
+    }
+
+    private void Car_information(String Car_information) {
+        car_databaseReference.child(Car_information).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Car_Spec_st = "배기량 : " + snapshot.child("Displacement").getValue() + "\n"
+                              + "공인 연비 : " + snapshot.child("Fuel_efficiency").getValue() + "\n"
+                              + "타이어 사이즈 : "  + snapshot.child("Tire_size").getValue();
+                Car_Spec.setText(Car_Spec_st);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }

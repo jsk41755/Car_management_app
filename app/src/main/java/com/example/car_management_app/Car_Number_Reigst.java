@@ -25,7 +25,10 @@ public class Car_Number_Reigst extends AppCompatActivity {
     Button CarNum_button;
 
     String CarNum, Spinner_text;
-    String[] items = {"아반떼", "소나타", "그랜져", "K3", "K5", "K7"};
+    String[] items = {"아반떼", "소나타", "그랜져"};
+    String[] items2 = {"쏘렌토", "팰리세이드", "투싼"};
+
+    ArrayAdapter<String> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,11 +41,22 @@ public class Car_Number_Reigst extends AppCompatActivity {
 
         Intent intent = getIntent();
         String KakaoId = intent.getExtras().getString("Name");
+        String Oil = intent.getExtras().getString("Oil");
 
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                this, android.R.layout.simple_spinner_item,items
-        );
+        if(Oil.equals("diesel")){        //경유 차량일 때
+             adapter = new ArrayAdapter<String>(
+                    this, android.R.layout.simple_spinner_item,items2
+            );
+        }
+        else{                   //휘발유 차량일 때
+             adapter = new ArrayAdapter<String>(
+                    this, android.R.layout.simple_spinner_item,items
+            );
+        }
+
+        Log.d("adapter", String.valueOf(adapter.getItem(1)));
+
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         Car_Kinds_Select.setAdapter(adapter);
         Car_Kinds_Select.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

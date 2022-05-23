@@ -108,7 +108,6 @@ public class Frag3 extends Fragment {
         time.setText(getTime);
 
         initspinnerfooter();
-        //updateKakaoLoginUi();
 
         Log.d("카카오","시간체크3");
         button.setOnClickListener(new View.OnClickListener() {
@@ -122,6 +121,7 @@ public class Frag3 extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 tableLayout = (TableLayout) v.findViewById(R.id.tableLayout);
+                tableLayout.removeAllViews();
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
                     for(DataSnapshot dataSnapshot2 : dataSnapshot.getChildren()) {
                         TableRow tableRow = new TableRow(v.getContext());
@@ -191,6 +191,7 @@ public class Frag3 extends Fragment {
         databaseReference.child(kakaoID).child("1").child("Supplies").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                visitors.clear();
                 int num = 0;
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
                     int sum = 0;
@@ -239,7 +240,7 @@ public class Frag3 extends Fragment {
                 legend.setEnabled(false);
 
                 barChart.setDragEnabled(false);
-                barChart.setVisibleXRangeMaximum(3);
+                barChart.setVisibleXRangeMaximum(5);
 
                 float barSpace = 0.1f;
                 float groupSpace = 0.5f;

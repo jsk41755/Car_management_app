@@ -68,6 +68,12 @@ public class Car_Select_Activity extends AppCompatActivity {
         car1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                CarSelect(true, "diesel");
+            }
+        });
+        car2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 CarSelect(true, "Gasoline");
             }
         });
@@ -141,6 +147,7 @@ public class Car_Select_Activity extends AppCompatActivity {
         databaseReference.child("Car_Management").child(kakaoID).child("1").child("Oil").setValue(Oil);
         Intent intent2 = new Intent(Car_Select_Activity.this, Car_Number_Reigst.class);
         intent2.putExtra("Name",kakaoID);
+        intent2.putExtra("Oil",Oil);
         Log.d("카카오",kakaoID);
         startActivity(intent2);
     }
