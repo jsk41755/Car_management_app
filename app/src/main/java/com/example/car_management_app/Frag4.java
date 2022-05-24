@@ -76,7 +76,7 @@ public class Frag4 extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.activity_tab4_fragment,container,false);
         //ct = getActivity().getApplicationContext();
-        ct = container.getContext();
+        /*ct = container.getContext();
 
         MapView mapView = new MapView(ct);
 
@@ -119,7 +119,7 @@ public class Frag4 extends Fragment {
                     }
 
                 });
-        /*
+        *//*
         fusedLocationClient.getCurrentLocation(5, new CancellationToken() {
             @Override
             public boolean isCancellationRequested() {
@@ -152,9 +152,9 @@ public class Frag4 extends Fragment {
                 searchKeyword(address[1] + " "+  address[2] + "정비소", mapView);
             }
         });
-         */
+         *//*
 
-        /*
+        *//*
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 //마지막 위치 받아오기
         Location loc_Current = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
@@ -193,7 +193,7 @@ public class Frag4 extends Fragment {
         Log.d("확인",address[1] + address[2]);
         searchKeyword(address[1] + " "+  address[2] + "정비소", mapView);
 
-         */
+         *//**/
         return v;
     }
 

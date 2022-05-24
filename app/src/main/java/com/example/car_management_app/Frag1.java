@@ -1,19 +1,14 @@
 package com.example.car_management_app;
 
-import static android.content.ContentValues.TAG;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -38,9 +33,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.kakao.sdk.auth.model.OAuthToken;
-import com.kakao.sdk.user.UserApiClient;
-import com.kakao.sdk.user.model.User;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -50,9 +42,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
-import kotlin.Unit;
-import kotlin.jvm.functions.Function2;
-
 public class Frag1 extends Fragment {
     private FirebaseDatabase database = FirebaseDatabase.getInstance();
     private DatabaseReference databaseReference = database.getReference();
@@ -60,25 +49,27 @@ public class Frag1 extends Fragment {
     private FirebaseDatabase car_database = FirebaseDatabase.getInstance();
     private DatabaseReference car_databaseReference = car_database.getReference().child("Car_Spec");
 
-    TextView engine_oil_Dday, wiper_blade_Dday, Cost, Drive_tip;
+    TextView engine_oil_Dday, wiper_blade_Dday, Cost, Drive_tip1, Drive_tip2, Drive_tip3;
     EditText textEdit;
     String TempText, Text, Car_name_st;
     public static String kakaoID;
 
     ImageView Brand_logo;
 
-    LinearLayout DriveLayout;
+    LinearLayout DriveLayout1, DriveLayout2, DriveLayout3;
 
     int max_num_value = 5;
     int min_num_value = 0;
 
     Random random = new Random();
-
-    int randomNum = random.nextInt(max_num_value - min_num_value + 1) + min_num_value;
     List Quote_list = new ArrayList();
 
     int cost = 0;
     Context ct;
+
+    int[] randomNum = new int[3];
+
+    String pop = null;
 
     @Nullable
     @Override
@@ -94,13 +85,21 @@ public class Frag1 extends Fragment {
         wiper_blade_Dday = v.findViewById(R.id.wiper_blade_Dday);
         Cost = v.findViewById(R.id.Cost);
         Brand_logo = v.findViewById(R.id.Brand_logo);
-        Drive_tip = v.findViewById(R.id.Drive_tip);
-        DriveLayout = v.findViewById(R.id.DriveLayout);
+        Drive_tip1 = v.findViewById(R.id.Drive_tip);
+        Drive_tip2 = v.findViewById(R.id.Drive_tip2);
+        Drive_tip3 = v.findViewById(R.id.Drive_tip3);
+
+        DriveLayout1 = v.findViewById(R.id.DriveLayout1);
+        DriveLayout2 = v.findViewById(R.id.DriveLayout2);
+        DriveLayout3 = v.findViewById(R.id.DriveLayout3);
 
         Calendar cal = Calendar.getInstance();
         cal.setTime(new Date());
         DateFormat dateFormat = new SimpleDateFormat("yyMMdd");
         Calendar cal2 = Calendar.getInstance();
+
+        String[][] NumList = {{"drive1_1","drive1_2","drive1_3"},{"drive2_1","drive2_2"},{"drive3_1","drive3_2","drive3_3"},{"drive4_1","drive4_2","drive4_3"},{"drive5_1","drive5_2"},
+                {"drive6_1","drive6_2","drive6_3"}};
 
         Quote_list.add("자동차 정기 검사 언제 해야 할까?");
         Quote_list.add("자동차 검사를 받지 않는다면?");
@@ -109,26 +108,108 @@ public class Frag1 extends Fragment {
         Quote_list.add("졸음운전은 음주운전과도 같다?!");
         Quote_list.add("방향지시등 점등하셨나요? \n깜빡이를 잊지 말아주세요.");
 
-        Drive_tip.setText(Quote_list.get(randomNum).toString());
 
-        DriveLayout.setOnClickListener(new View.OnClickListener() {
+        for(int i = 0 ; i < 3 ; i++) {
+            randomNum[i]= random.nextInt(max_num_value - min_num_value + 1) + min_num_value;
+            for(int j=0;j<i;j++)
+            {
+                if(randomNum[i]==randomNum[j])
+                {
+                    i--;
+                }
+            }
+
+            Log.d("randomNum[0]", String.valueOf(randomNum[i]));
+        }
+
+        Drive_tip1.setText(Quote_list.get(randomNum[0]).toString());
+        Drive_tip2.setText(Quote_list.get(randomNum[1]).toString());
+        Drive_tip3.setText(Quote_list.get(randomNum[2]).toString());
+
+        DriveLayout1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder dlg = new AlertDialog.Builder(ct);
                 View v = getLayoutInflater().inflate(R.layout.tip_activity, null);
                 dlg.setView(v);
-                dlg.setTitle(Quote_list.get(randomNum).toString());
+                dlg.setTitle(Quote_list.get(randomNum[0]).toString());
                 dlg.setPositiveButton("닫기", null);
                 dlg.show();
 
                 List<SlideModel> slideModels = new ArrayList<>();
-                slideModels.add(new SlideModel(R.drawable.drive1, ScaleTypes.CENTER_CROP));
-                slideModels.add(new SlideModel(R.drawable.drive2, ScaleTypes.CENTER_CROP));
-                slideModels.add(new SlideModel(R.drawable.drive3, ScaleTypes.CENTER_CROP));
+                if(randomNum[0] == 0 || randomNum[0] == 2 || randomNum[0] == 3 || randomNum[0] == 5){
+                    for(int i = 0; i<3; i++){
+                        pop = NumList[randomNum[0]][i];
+                        slideModels.add(new SlideModel(getResources().getIdentifier(pop,"drawable", ct.getPackageName()), ScaleTypes.CENTER_CROP));
+                    }
+                }
+                else{
+                    for(int i = 0; i<2; i++){
+                        pop = NumList[randomNum[0]][i];
+                        slideModels.add(new SlideModel(getResources().getIdentifier(pop,"drawable", ct.getPackageName()), ScaleTypes.CENTER_CROP));
+                    }
+                }
+
                 ImageSlider imageSlider = v.findViewById(R.id.imageSlider);
                 imageSlider.setImageList(slideModels, ScaleTypes.CENTER_CROP);
 
                 Log.d("Num", String.valueOf(slideModels.isEmpty()));
+            }
+        });
+
+        DriveLayout2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder dlg = new AlertDialog.Builder(ct);
+                View v = getLayoutInflater().inflate(R.layout.tip_activity, null);
+                dlg.setView(v);
+                dlg.setTitle(Quote_list.get(randomNum[1]).toString());
+                dlg.setPositiveButton("닫기", null);
+                dlg.show();
+
+                List<SlideModel> slideModels = new ArrayList<>();
+                if(randomNum[1] == 0 || randomNum[1] == 2 || randomNum[1] == 3 || randomNum[1] == 5){
+                    for(int i = 0; i<3; i++){
+                        pop = NumList[randomNum[1]][i];
+                        slideModels.add(new SlideModel(getResources().getIdentifier(pop,"drawable", ct.getPackageName()), ScaleTypes.CENTER_CROP));
+                    }
+                }
+                else{
+                    for(int i = 0; i<2; i++){
+                        pop = NumList[randomNum[1]][i];
+                        slideModels.add(new SlideModel(getResources().getIdentifier(pop,"drawable", ct.getPackageName()), ScaleTypes.CENTER_CROP));
+                    }
+                }
+                ImageSlider imageSlider = v.findViewById(R.id.imageSlider);
+                imageSlider.setImageList(slideModels, ScaleTypes.CENTER_CROP);
+            }
+        });
+
+        DriveLayout3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder dlg = new AlertDialog.Builder(ct);
+                View v = getLayoutInflater().inflate(R.layout.tip_activity, null);
+                dlg.setView(v);
+                dlg.setTitle(Quote_list.get(randomNum[2]).toString());
+                dlg.setPositiveButton("닫기", null);
+                dlg.show();
+
+                List<SlideModel> slideModels = new ArrayList<>();
+                if(randomNum[2] == 0 || randomNum[2] == 2 || randomNum[2] == 3 || randomNum[2] == 5){
+                    for(int i = 0; i<3; i++){
+                        pop = NumList[randomNum[2]][i];
+                        slideModels.add(new SlideModel(getResources().getIdentifier(pop,"drawable", ct.getPackageName()), ScaleTypes.CENTER_CROP));
+                    }
+                }
+                else{
+                    for(int i = 0; i<2; i++){
+                        pop = NumList[randomNum[2]][i];
+                        slideModels.add(new SlideModel(getResources().getIdentifier(pop,"drawable", ct.getPackageName()), ScaleTypes.CENTER_CROP));
+                    }
+                }
+                ImageSlider imageSlider = v.findViewById(R.id.imageSlider);
+                imageSlider.setImageList(slideModels, ScaleTypes.CENTER_CROP);
             }
         });
 

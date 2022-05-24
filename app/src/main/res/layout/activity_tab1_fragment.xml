@@ -126,15 +126,10 @@
 
     </LinearLayout>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
-
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="150dp"
             android:layout_marginStart="25dp"
             android:layout_marginTop="30dp"
             android:layout_marginEnd="25dp"
@@ -143,7 +138,7 @@
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
             <TextView
                 android:id="@+id/textView"
@@ -160,36 +155,105 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="parent" />
 
-            <LinearLayout
-                android:id="@+id/DriveLayout"
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="15dp"
-                android:layout_marginBottom="5dp"
-                android:background="@drawable/shape_button"
-                android:backgroundTint="@color/ivory"
-                android:gravity="start">
+                android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/Drive_tip"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_button"
+                    android:backgroundTint="@color/ivory"
+                    android:orientation="vertical"
+                    android:gravity="start">
+
+                <LinearLayout
+                    android:id="@+id/DriveLayout1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginEnd="15dp"
-                    android:layout_marginBottom="15dp"
-                    android:fontFamily="@font/cafe24_surround_air"
-                    android:gravity="center"
-                    android:text="@string/tip1"
-                    android:textColor="@color/black"
-                    android:textSize="17dp" />
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/shape_button"
+                    android:backgroundTint="@color/ivory"
+                    android:gravity="start">
 
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/Drive_tip"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:layout_marginBottom="15dp"
+                        android:fontFamily="@font/cafe24_surround_air"
+                        android:gravity="center"
+                        android:text="@string/tip1"
+                        android:textColor="@color/black"
+                        android:textSize="17dp" />
 
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/DriveLayout2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:gravity="start"
+                    android:background="@drawable/shape_button"
+                    android:backgroundTint="@color/lightblue">
+                    <TextView
+                        android:id="@+id/Drive_tip2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/cafe24_surround_air"
+                        android:text="@string/tip5"
+                        android:textColor="@color/black"
+                        android:textSize="17dp"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="15dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/DriveLayout3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:gravity="start"
+                    android:background="@drawable/shape_button"
+                    android:backgroundTint="@color/lightpink">
+                    <TextView
+                        android:id="@+id/Drive_tip3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/cafe24_surround_air"
+                        android:text="@string/tip6"
+                        android:textColor="@color/black"
+                        android:textSize="17dp"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="15dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"/>
+                        </LinearLayout>
+                </LinearLayout>
+            </ScrollView>
         </LinearLayout>
 
-    </ScrollView>
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
