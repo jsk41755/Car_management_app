@@ -10,7 +10,7 @@
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:layout_marginStart="25dp"
         android:layout_marginEnd="25dp"
         android:orientation="horizontal"
@@ -30,7 +30,7 @@
                 android:id="@+id/textView3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
+                android:gravity="start"
                 android:text="My Car"
                 android:textSize="20dp"
                 android:textColor="@color/black"
@@ -41,7 +41,7 @@
                 android:id="@+id/engine_oil_Dday"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
+                android:gravity="start"
                 android:text="엔진오일 D-000"
                 android:textSize="15dp"
                 android:textColor="@color/gray"
@@ -52,7 +52,7 @@
                 android:id="@+id/wiper_blade_Dday"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
+                android:gravity="start"
                 android:text="와이퍼 교체 D-000"
                 android:textSize="15dp"
                 android:textColor="@color/gray"
@@ -63,7 +63,7 @@
                 android:id="@+id/Cost"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
+                android:gravity="start"
                 android:text="이번 달 지출 0000\\"
                 android:textSize="15dp"
                 android:textColor="@color/gray"
@@ -87,7 +87,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:layout_marginStart="25dp"
         android:layout_marginEnd="25dp"
         android:background="@drawable/shape_homebutton"
@@ -106,7 +106,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="parent"
             android:layout_marginBottom="2dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_marginStart="15dp"/>
 
         <EditText
@@ -119,53 +119,54 @@
             android:padding="5dp"
             android:hint="memo"
             app:layout_constraintTop_toBottomOf="@+id/textView7"
-            android:layout_marginBottom="2dp"
-            android:layout_marginTop="2dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="5dp"
             android:layout_marginStart="15dp"
-            android:layout_marginEnd="15dp"/>
+            android:layout_marginEnd="15dp" />
 
     </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="25dp"
-            android:background="@drawable/shape_button"
-            android:elevation="5dp"
-            android:orientation="vertical"
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="280dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="25dp"
+        android:background="@drawable/shape_homebutton"
+        android:elevation="5dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="2dp"
+            android:fontFamily="@font/cafe24_surround"
+            android:text="교통법규 tip!"
+            android:textColor="@color/black"
+            android:textSize="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+            app:layout_constraintTop_toBottomOf="parent" />
 
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="2dp"
-                android:fontFamily="@font/cafe24_surround"
-                android:text="교통법규 tip!"
-                android:textColor="@color/black"
-                android:textSize="20dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="parent" />
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-            <ScrollView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/shape_button"
-                    android:backgroundTint="@color/ivory"
-                    android:orientation="vertical"
-                    android:gravity="start">
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_button"
+                android:backgroundTint="@color/white"
+                android:gravity="start"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:id="@+id/DriveLayout1"
@@ -199,61 +200,60 @@
                     android:id="@+id/DriveLayout2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginTop="5dp"
                     android:layout_marginStart="15dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginEnd="15dp"
-                    android:gravity="start"
+                    android:layout_marginBottom="5dp"
                     android:background="@drawable/shape_button"
-                    android:backgroundTint="@color/lightblue">
+                    android:backgroundTint="@color/lightblue"
+                    android:gravity="start">
+
                     <TextView
                         android:id="@+id/Drive_tip2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:layout_marginBottom="15dp"
                         android:fontFamily="@font/cafe24_surround_air"
+                        android:gravity="center"
                         android:text="@string/tip5"
                         android:textColor="@color/black"
-                        android:textSize="17dp"
-                        android:gravity="center"
-                        android:layout_gravity="center"
-                        android:layout_marginBottom="15dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginEnd="15dp"/>
+                        android:textSize="17dp" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/DriveLayout3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginTop="5dp"
                     android:layout_marginStart="15dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginEnd="15dp"
-                    android:gravity="start"
+                    android:layout_marginBottom="5dp"
                     android:background="@drawable/shape_button"
-                    android:backgroundTint="@color/lightpink">
+                    android:backgroundTint="@color/lightpink"
+                    android:gravity="start">
+
                     <TextView
                         android:id="@+id/Drive_tip3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:layout_marginBottom="15dp"
                         android:fontFamily="@font/cafe24_surround_air"
+                        android:gravity="center"
                         android:text="@string/tip6"
                         android:textColor="@color/black"
-                        android:textSize="17dp"
-                        android:gravity="center"
-                        android:layout_gravity="center"
-                        android:layout_marginBottom="15dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginEnd="15dp"/>
-                        </LinearLayout>
+                        android:textSize="17dp" />
                 </LinearLayout>
-            </ScrollView>
-        </LinearLayout>
-
-
-
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

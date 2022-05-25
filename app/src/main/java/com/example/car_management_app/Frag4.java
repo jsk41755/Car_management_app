@@ -75,6 +75,7 @@ public class Frag4 extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.activity_tab4_fragment,container,false);
+        /*
         //ct = getActivity().getApplicationContext();
         /*ct = container.getContext();
 
