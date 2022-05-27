@@ -19,7 +19,7 @@
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="55dp"
             app:tabTextAppearance="@style/tab_text"
             app:tabSelectedTextColor="@color/maingreen">
 
@@ -38,7 +38,7 @@
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="카계부"
+                android:text="차계부"
                 android:icon="@drawable/chart_icon"/>
 
             <com.google.android.material.tabs.TabItem
@@ -50,7 +50,7 @@
             <com.google.android.material.tabs.TabItem
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="용품"
+                android:text="용품추천"
                 android:icon="@drawable/cart_icon"/>
 
         </com.google.android.material.tabs.TabLayout>

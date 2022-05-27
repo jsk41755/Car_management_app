@@ -16,7 +16,7 @@
 
     <style name="tab_text" parent="TextAppearance.Design.Tab">
         <item name="android:textSize">12dp</item>
-        <item name="android:fontFamily">@font/cafe24_surround_air</item>
+        <item name="android:fontFamily">@font/cafe24ssurroundair</item>
     </style>
 
 </resources>

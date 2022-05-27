@@ -11,45 +11,44 @@
     android:background="@color/maingreen"
     app:contentInsetStart="0dp">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
             android:src="@drawable/car_icon_resize"
             android:layout_gravity="start"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
             />
 
         <TextView
             android:id="@+id/toolbartext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/cafe24ssurround"
             android:gravity="center"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:textSize="30dp"
-            android:text="차계부"
+            android:layout_marginTop="7dp"
+            android:layout_marginStart="100dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:text="카계부"
             android:textColor="@color/white"
-            android:fontFamily="@font/cafe24_surround"
-            android:layout_gravity="center" />
+            android:textSize="30dp" />
 
         <Button
             android:id="@+id/settings"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="100dp"
-            android:background="@drawable/settings_resize" />
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="110dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/settings_white_resize" />
 
-    </RelativeLayout>
+    </LinearLayout>
 
 </androidx.appcompat.widget.Toolbar>

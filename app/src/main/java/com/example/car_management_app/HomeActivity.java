@@ -94,7 +94,7 @@ public class HomeActivity extends AppCompatActivity {
         tabLayout.getTabAt(1).setText("차량정보");
         tabLayout.getTabAt(2).setText("카계부");
         tabLayout.getTabAt(3).setText("지도");
-        tabLayout.getTabAt(4).setText("용품");
+        tabLayout.getTabAt(4).setText("용품추천");
 
         //tabLayout에 아이콘 설정 부분
         tabLayout.getTabAt(0).setIcon(R.drawable.home_icon);

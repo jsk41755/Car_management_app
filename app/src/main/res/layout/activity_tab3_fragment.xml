@@ -14,6 +14,7 @@
         android:layout_margin="20dp"
         android:textSize="24dp"
         android:textColor="@color/black"
+        android:fontFamily="@font/hallymgothic_bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -29,32 +30,47 @@
 
         <Spinner
             android:id="@+id/spinner"
-            android:layout_width="130dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/bg_spinner"/>
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/bg_spinner" />
 
         <EditText
             android:id="@+id/editTextTextPersonName"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="number" />
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="7dp"
+            android:inputType="number"
+            android:fontFamily="@font/hallymgothic_regular"
+            android:hint="금액을 입력해주세요."
+            android:textSize="15dp"/>
 
         <Button
             android:id="@+id/button12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="저장" />
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:text="저장"
+            android:fontFamily="@font/hallymgothic_medium"
+            android:textSize="15dp"/>
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="250dp"
         android:orientation="vertical"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:layout_marginStart="30dp"
         android:layout_marginEnd="30dp"
+        android:layout_marginBottom="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout">
@@ -64,7 +80,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
-            android:text="사용내역" />
+            android:text="사용내역"
+            android:fontFamily="@font/hallymgothic_medium"
+            android:layout_marginBottom="5dp"
+            android:textSize="20dp"/>
 
         <TableLayout
             android:id="@+id/tableLayout"
@@ -87,7 +106,8 @@
                     android:padding="5dp"
                     android:text="날짜"
                     android:textColor="#000000"
-                    android:textSize="15dp" />
+                    android:textSize="15dp"
+                    android:fontFamily="@font/hallymgothic_regular"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -97,7 +117,8 @@
                     android:padding="5dp"
                     android:text="구분"
                     android:textColor="#000000"
-                    android:textSize="15dp" />
+                    android:textSize="15dp"
+                    android:fontFamily="@font/hallymgothic_regular"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -107,7 +128,8 @@
                     android:padding="5dp"
                     android:text="금액"
                     android:textColor="#000000"
-                    android:textSize="15dp" />
+                    android:textSize="15dp"
+                    android:fontFamily="@font/hallymgothic_regular"/>
             </TableRow>
 
         </TableLayout>
@@ -118,7 +140,8 @@
         android:layout_width="match_parent"
         android:layout_height="210dp"
         android:layout_gravity="center"
-        android:layout_margin="5dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
         android:background="@drawable/edittext_rounded_corner_rectangle"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"/>
 

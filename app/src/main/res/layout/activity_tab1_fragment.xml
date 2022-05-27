@@ -9,7 +9,7 @@
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="130dp"
         android:layout_marginTop="20dp"
         android:layout_marginStart="25dp"
         android:layout_marginEnd="25dp"
@@ -24,7 +24,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:padding="10dp">
+            android:padding="10dp"
+            android:layout_marginStart="5dp">
 
             <TextView
                 android:id="@+id/textView3"
@@ -34,7 +35,7 @@
                 android:text="My Car"
                 android:textSize="20dp"
                 android:textColor="@color/black"
-                android:fontFamily="@font/cafe24_surround"
+                android:fontFamily="@font/hallymgothic_medium"
                 android:layout_marginBottom="10dp"/>
 
             <TextView
@@ -45,7 +46,7 @@
                 android:text="엔진오일 D-000"
                 android:textSize="15dp"
                 android:textColor="@color/gray"
-                android:fontFamily="@font/cafe24_surround_air"
+                android:fontFamily="@font/hallymgothic_regular"
                 android:layout_marginBottom="2dp"/>
 
             <TextView
@@ -56,7 +57,7 @@
                 android:text="와이퍼 교체 D-000"
                 android:textSize="15dp"
                 android:textColor="@color/gray"
-                android:fontFamily="@font/cafe24_surround_air"
+                android:fontFamily="@font/hallymgothic_regular"
                 android:layout_marginBottom="2dp"/>
 
             <TextView
@@ -67,8 +68,9 @@
                 android:text="이번 달 지출 0000\\"
                 android:textSize="15dp"
                 android:textColor="@color/gray"
-                android:fontFamily="@font/cafe24_surround_air"
+                android:fontFamily="@font/hallymgothic_regular"
                 android:layout_marginBottom="2dp"/>
+
         </LinearLayout>
 
         <ImageView
@@ -77,6 +79,10 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:src="@drawable/ic_launcher_background" />
     </LinearLayout>
 
@@ -101,7 +107,7 @@
             android:text="Memo"
             android:textColor="@color/black"
             android:textSize="20dp"
-            android:fontFamily="@font/cafe24_surround"
+            android:fontFamily="@font/hallymgothic_medium"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="parent"
@@ -117,7 +123,9 @@
             android:inputType="textPersonName"
             android:background="@drawable/edittext_rounded_corner_rectangle"
             android:padding="5dp"
-            android:hint="memo"
+            android:hint="내용을 입력하세요."
+            android:fontFamily="@font/hallymgothic_regular"
+            android:textSize="15dp"
             app:layout_constraintTop_toBottomOf="@+id/textView7"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="5dp"
@@ -129,7 +137,7 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="280dp"
+        android:layout_height="300dp"
         android:layout_marginStart="25dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="25dp"
@@ -148,7 +156,7 @@
             android:layout_marginStart="15dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="2dp"
-            android:fontFamily="@font/cafe24_surround"
+            android:fontFamily="@font/hallymgothic_medium"
             android:text="교통법규 tip!"
             android:textColor="@color/black"
             android:textSize="20dp"
@@ -188,7 +196,7 @@
                         android:layout_marginTop="15dp"
                         android:layout_marginEnd="15dp"
                         android:layout_marginBottom="15dp"
-                        android:fontFamily="@font/cafe24_surround_air"
+                        android:fontFamily="@font/hallymgothic_regular"
                         android:gravity="center"
                         android:text="@string/tip1"
                         android:textColor="@color/black"
@@ -217,7 +225,7 @@
                         android:layout_marginTop="15dp"
                         android:layout_marginEnd="15dp"
                         android:layout_marginBottom="15dp"
-                        android:fontFamily="@font/cafe24_surround_air"
+                        android:fontFamily="@font/hallymgothic_regular"
                         android:gravity="center"
                         android:text="@string/tip5"
                         android:textColor="@color/black"
@@ -245,7 +253,7 @@
                         android:layout_marginTop="15dp"
                         android:layout_marginEnd="15dp"
                         android:layout_marginBottom="15dp"
-                        android:fontFamily="@font/cafe24_surround_air"
+                        android:fontFamily="@font/hallymgothic_regular"
                         android:gravity="center"
                         android:text="@string/tip6"
                         android:textColor="@color/black"
