@@ -5,6 +5,7 @@
     android:orientation="vertical"
     android:gravity="center">
 
+
     <LinearLayout
         android:layout_width="300dp"
         android:layout_height="wrap_content"
@@ -38,7 +39,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/buttonSettings"
+        android:id="@+id/logoutButton"
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:background="@drawable/shape_button"
@@ -57,7 +58,7 @@
             android:layout_marginStart="45dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="45dp"
-            android:layout_marginBottom="10dp"/>
+            android:layout_marginBottom="5dp"/>
 
     </LinearLayout>
 
@@ -92,36 +93,28 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="300dp"
+        android:id="@+id/homeBack"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginStart="45dp"
-        android:layout_marginTop="70dp"
-        android:layout_marginEnd="45dp"
-        android:layout_marginBottom="10dp">
+        android:layout_marginTop="20dp">
+
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/color_icon_resize"
-            android:layout_marginStart="60dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="2dp"/>
+            android:src="@drawable/home_icon_resize"
+            />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="카계부"
-            android:textSize="30dp"
-            android:textColor="@color/maingreen"
-            android:fontFamily="@font/cafe24ssurround"
-            android:gravity="center"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="45dp"
-            android:layout_marginBottom="2dp"/>
+            android:text="HOME"
+            android:textSize="20dp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/hallymgothic_regular"/>
 
     </LinearLayout>
+
 
 </LinearLayout>

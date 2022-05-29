@@ -17,9 +17,11 @@
         <entry key="..\:/CBNU_grade3/Car_management_app/app/src/main/res/layout/activity_tab2_fragment.xml" value="0.36614583333333334" />
         <entry key="..\:/CBNU_grade3/Car_management_app/app/src/main/res/layout/activity_tab3_fragment.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/ekffp/androidProjects/Car_management_app/app/src/main/res/drawable/bg_spinner.xml" value="0.216" />
+        <entry key="..\:/Users/ekffp/androidProjects/Car_management_app/app/src/main/res/drawable/car_icon_resize.xml" value="0.1" />
         <entry key="..\:/Users/ekffp/androidProjects/Car_management_app/app/src/main/res/drawable/color_icon_resize.xml" value="0.216" />
         <entry key="..\:/Users/ekffp/androidProjects/Car_management_app/app/src/main/res/drawable/diesel_icon_resize.xml" value="0.1" />
         <entry key="..\:/Users/ekffp/androidProjects/Car_management_app/app/src/main/res/drawable/edittext_rounded_corner_rectangle.xml" value="0.2025" />
+        <entry key="..\:/Users/ekffp/androidProjects/Car_management_app/app/src/main/res/drawable/home_icon_resize.xml" value="0.2225" />
         <entry key="..\:/Users/ekffp/androidProjects/Car_management_app/app/src/main/res/drawable/progressbar_progressbar1.xml" value="0.216" />
         <entry key="..\:/Users/ekffp/androidProjects/Car_management_app/app/src/main/res/drawable/settings_resize.xml" value="0.216" />
         <entry key="..\:/Users/ekffp/androidProjects/Car_management_app/app/src/main/res/drawable/settings_white_resize.xml" value="0.216" />
@@ -36,6 +38,7 @@
         <entry key="..\:/Users/ekffp/androidProjects/Car_management_app/app/src/main/res/layout/activity_tab3_fragment.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/ekffp/androidProjects/Car_management_app/app/src/main/res/layout/activity_tab4_fragment.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/ekffp/androidProjects/Car_management_app/app/src/main/res/layout/activity_tab5_fragment.xml" value="0.24947916666666667" />
+        <entry key="..\:/Users/ekffp/androidProjects/Car_management_app/app/src/main/res/layout/activity_toolbar.xml" value="0.1" />
         <entry key="..\:/Users/ekffp/androidProjects/Car_management_app/app/src/main/res/layout/car_icon_resize.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/ekffp/androidProjects/Car_management_app/app/src/main/res/layout/item_list.xml" value="0.176" />
         <entry key="..\:/Users/ekffp/androidProjects/Car_management_app/app/src/main/res/layout/tip_activity.xml" value="0.13697916666666668" />

@@ -22,6 +22,7 @@ import kotlin.jvm.functions.Function1;
 import kotlin.jvm.functions.Function2;
 
 public class LoginActivity extends AppCompatActivity {
+
     private static final String TAG = "MainActivity";
 
     private View loginButton, logoutButton;

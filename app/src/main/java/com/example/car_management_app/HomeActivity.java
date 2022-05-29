@@ -14,6 +14,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.material.tabs.TabLayout;
@@ -30,6 +32,7 @@ public class HomeActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private FragmentAdapter adapter;
+    private Button settings;
 
     TextView textView;
     public static String kakaoID;
@@ -39,6 +42,8 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        setVolumeControlStream(R.layout.activity_home);
+
         kakaoID = getIntent().getStringExtra("Name");
         if(kakaoID != null)
             Log.d("카카오 이름", kakaoID);
@@ -60,6 +65,16 @@ public class HomeActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
         CekSession();
+
+        settings = findViewById(R.id.settings);
+
+        settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), Settings.class);
+                startActivity(intent);
+            }
+        });
 
         tabLayout=findViewById(R.id.tabs);
         viewPager=findViewById(R.id.view_pager);
