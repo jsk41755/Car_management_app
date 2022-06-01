@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -44,6 +45,8 @@ public class Frag2 extends Fragment {
     ProgressBar Car_inspection_progress, EngineOil_filter_progress, Airconditioner_filter_progress, CoolingWater_progress,
             Wiper_blade_progress, BreakOil_progress;
 
+    ImageView imageView2;
+
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference databaseReference = database.getInstance().getReference("Car_Management");
 
@@ -68,6 +71,8 @@ public class Frag2 extends Fragment {
 
         Car_name = v.findViewById(R.id.Car_name);
         Car_Spec = v.findViewById(R.id.Car_Spec);
+
+        imageView2 = (ImageView) v.findViewById(R.id.imageView2);
 
         Car_inspection_progress = (ProgressBar) v.findViewById(R.id.Car_inspection_progress);
         EngineOil_filter_progress = (ProgressBar) v.findViewById(R.id.EngineOil_filter_progress);

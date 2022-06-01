@@ -17,6 +17,8 @@
         android:usesCleartextTraffic="true">
         <meta-data android:name="com.kakao.sdk.AppKey" android:value="28024e75b13ddbf12969583a1027b447"/>
         <activity
+            android:name=".Settings" />
+        <activity
             android:name=".Car_Number_Reigst"
             android:exported="false" />
         <activity
@@ -39,7 +41,6 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
