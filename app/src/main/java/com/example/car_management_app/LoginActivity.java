@@ -41,17 +41,24 @@ public class LoginActivity extends AppCompatActivity {
         loginActivity = LoginActivity.this;
 
         Intent logoutintent = getIntent();
-        String logoutstatus = logoutintent.getStringExtra("로그아웃");
-        if(logoutstatus.equals("로그아웃완료")){
-            UserApiClient.getInstance().logout(new Function1<Throwable, Unit>() {
-                @Override
-                public Unit invoke(Throwable throwable) {
-                    nickName.setText(null);
-                    loginButton.setVisibility(View.VISIBLE);
-                    logoutButton.setVisibility(View.GONE);
-                    return null;
-                }
-            });
+        Boolean logoutstatus = logoutintent.getBooleanExtra("로그아웃", false);
+        if(logoutstatus != null)
+        {
+            Log.d("로그아웃6",logoutstatus.toString());
+            if(logoutstatus){
+                UserApiClient.getInstance().logout(new Function1<Throwable, Unit>() {
+                    @Override
+                    public Unit invoke(Throwable throwable) {
+                        nickName.setText(null);
+                        loginButton.setVisibility(View.VISIBLE);
+                        logoutButton.setVisibility(View.GONE);
+                        return null;
+                    }
+                });
+            }
+        }
+        else{
+            updateKakaoLoginUi();
         }
 
         Log.d("카카오", "시간체크");
@@ -122,7 +129,6 @@ public class LoginActivity extends AppCompatActivity {
                     nickName.setText(user.getKakaoAccount().getProfile().getNickname());
 
 
-                    loginButton.setVisibility(View.GONE);
                     logoutButton.setVisibility(View.VISIBLE);
 
                     Intent intent = new Intent(LoginActivity.this, Car_Select_Activity.class);

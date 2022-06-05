@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:src="@drawable/kakao_login_medium_wide"
-            android:visibility="gone" />
+            android:visibility="visible" />
 
     </LinearLayout>
 

@@ -87,10 +87,11 @@ public class Settings extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Settings.this, HomeActivity.class);
-                intent.putExtra("로그아웃","로그아웃완료");
-                homeActivity.finish();
+                Boolean logoutstatus = true;
+                //homeActivity.finish();
                 SharedPrefs.saveSharedSetting(Settings.this, "CaptainCode", "true");
                 SharedPrefs2.saveSharedSetting(Settings.this, "CaptainCode", "true");
+                intent.putExtra("로그아웃",logoutstatus);
                 startActivity(intent);
                 finish();
             }
