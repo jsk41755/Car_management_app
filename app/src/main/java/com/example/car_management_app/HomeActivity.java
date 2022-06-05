@@ -27,6 +27,7 @@ import kotlin.jvm.functions.Function2;
 
 public class HomeActivity extends AppCompatActivity {
 
+    public static Activity homeActivity;
     private static final String TAG = "Main_Activity";
     private SharedPreferences preferences;
     private TabLayout tabLayout;
@@ -38,11 +39,13 @@ public class HomeActivity extends AppCompatActivity {
     public static String kakaoID;
     SharedPreferences pref;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         setVolumeControlStream(R.layout.activity_home);
+        homeActivity = HomeActivity.this;
 
         kakaoID = getIntent().getStringExtra("Name");
         if(kakaoID != null)

@@ -36,11 +36,15 @@ public class Car_Select_Activity extends AppCompatActivity {
 
     public static String kakaoID;
 
+
+    public static Activity carselectActivity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_car_select);
+        carselectActivity = Car_Select_Activity.this;
         kakaoID = getIntent().getStringExtra("Name");
         //updateKakaoLoginUi();
 
@@ -150,5 +154,6 @@ public class Car_Select_Activity extends AppCompatActivity {
         intent2.putExtra("Oil",Oil);
         Log.d("카카오",kakaoID);
         startActivity(intent2);
+        finish();
     }
 }

@@ -7,6 +7,7 @@ import android.app.NotificationManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import androidx.annotation.Nullable;
 
@@ -38,6 +39,12 @@ public class Settings extends AppCompatActivity {
 
     private LinearLayout homeBack;
     Switch switchAlarm;
+    LinearLayout logoutButton;
+
+    HomeActivity homeActivity = (HomeActivity)HomeActivity.homeActivity;
+    Car_Select_Activity car_select_activity = (Car_Select_Activity)Car_Select_Activity.carselectActivity;
+    Car_Number_Reigst car_number_reigst = (Car_Number_Reigst)Car_Number_Reigst.carreigstActivity;
+    LoginActivity loginActivity = (LoginActivity)LoginActivity.loginActivity;
 
     NotificationManagerCompat notificationManagerCompat;
     Notification notification;
@@ -51,6 +58,7 @@ public class Settings extends AppCompatActivity {
 
         LinearLayout homeBack = (LinearLayout) findViewById(R.id.homeBack);
         switchAlarm = findViewById(R.id.switchAlarm);
+        logoutButton = findViewById(R.id.logoutButton);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel("myCh", "My Channel", NotificationManager.IMPORTANCE_DEFAULT);
@@ -71,6 +79,19 @@ public class Settings extends AppCompatActivity {
         homeBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                finish();
+            }
+        });
+
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Settings.this, HomeActivity.class);
+                intent.putExtra("로그아웃","로그아웃완료");
+                homeActivity.finish();
+                SharedPrefs.saveSharedSetting(Settings.this, "CaptainCode", "true");
+                SharedPrefs2.saveSharedSetting(Settings.this, "CaptainCode", "true");
+                startActivity(intent);
                 finish();
             }
         });

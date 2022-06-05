@@ -2,6 +2,7 @@ package com.example.car_management_app;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -29,11 +30,12 @@ public class Car_Number_Reigst extends AppCompatActivity {
     String[] items2 = {"쏘렌토", "팰리세이드", "투싼"};
 
     ArrayAdapter<String> adapter;
-
+    public static Activity carreigstActivity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_car_number_reigst);
+        carreigstActivity = Car_Number_Reigst.this;
 
         CarNum_Edit = findViewById(R.id.CarNum_Edit);
         Car_Kinds_Select = findViewById(R.id.Car_Kinds_Select);
@@ -84,6 +86,7 @@ public class Car_Number_Reigst extends AppCompatActivity {
 
                 intent2.putExtra("Name",KakaoId);
                 startActivity(intent2);
+                finish();
             }
         });
     }

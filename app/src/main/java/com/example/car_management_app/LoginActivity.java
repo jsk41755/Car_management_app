@@ -31,12 +31,29 @@ public class LoginActivity extends AppCompatActivity {
     SharedPreferences pref;
     SharedPreferences.Editor editor;
 
+    public static Activity loginActivity;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        updateKakaoLoginUi();
+        loginActivity = LoginActivity.this;
+
+        Intent logoutintent = getIntent();
+        String logoutstatus = logoutintent.getStringExtra("로그아웃");
+        if(logoutstatus.equals("로그아웃완료")){
+            UserApiClient.getInstance().logout(new Function1<Throwable, Unit>() {
+                @Override
+                public Unit invoke(Throwable throwable) {
+                    nickName.setText(null);
+                    loginButton.setVisibility(View.VISIBLE);
+                    logoutButton.setVisibility(View.GONE);
+                    return null;
+                }
+            });
+        }
+
         Log.d("카카오", "시간체크");
 
         loginButton = findViewById(R.id.login);
@@ -118,6 +135,7 @@ public class LoginActivity extends AppCompatActivity {
                     intent.putExtra("Name",sName);
 
                     startActivity(intent);
+                    finish();
 
                 }
                 else{
