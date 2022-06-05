@@ -2,11 +2,18 @@ package com.example.car_management_app;
 
 import static android.content.ContentValues.TAG;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
@@ -31,6 +38,9 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import android.util.Log;
+
+import javax.xml.transform.Result;
 
 import kotlin.Unit;
 import kotlin.jvm.functions.Function2;
@@ -85,6 +95,14 @@ public class Frag2 extends Fragment {
         cal.setTime(new Date());
         DateFormat dateFormat = new SimpleDateFormat("yyMMdd");
         Calendar cal2 = Calendar.getInstance();
+
+
+        imageView2.setOnClickListener(view -> {
+            Intent intent = new Intent();
+            intent.setType("image/*");
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+            launcher.launch(intent);
+        });
 
         databaseReference.child(kakaoID).child("1").child("Car_Information").child("Car_Kinds").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -172,6 +190,24 @@ public class Frag2 extends Fragment {
 
         return v;
     }
+
+    
+    ActivityResultLauncher<Intent> launcher = registerForActivityResult
+            (new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result)
+                {
+                    if(result.getResultCode() == Activity.RESULT_OK)
+                    {
+                        Log.e(null, "result : " + result);
+                        Intent intent = result.getData();
+                        Log.e(null, "intent : " + intent);
+                        Uri uri = intent.getData();
+                        Log.e(null, "uri : " + uri);
+                        imageView2.setImageURI(uri);
+                    }
+                }
+            });
 
     private void Car_information(String Car_information) {
         car_databaseReference.child(Car_information).addListenerForSingleValueEvent(new ValueEventListener() {

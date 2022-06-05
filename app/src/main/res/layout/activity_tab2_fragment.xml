@@ -20,9 +20,8 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:orientation="vertical"
             android:padding="15dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -32,27 +31,30 @@
                 android:id="@+id/Car_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="My Car"
-                android:textSize="20dp"
                 android:fontFamily="@font/hallymgothic_bold"
-                android:textColor="@color/black" />
+                android:text="My Car"
+                android:textColor="@color/black"
+                android:textSize="20dp" />
 
             <TextView
                 android:id="@+id/Car_Spec"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ"
-                android:textColor="@color/black"
-                android:fontFamily="@font/hallymgothic_regular"/>
+                android:fontFamily="@font/hallymgothic_regular"
+                android:text="ㅇㅇㅇㅇㅇoooooooooo"
+                android:textColor="@color/black" />
 
         </LinearLayout>
 
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="12dp"
+            android:background="@drawable/shape_button"
+            android:backgroundTint="@color/lightgray"
             android:src="@drawable/car_icon_resize" />
 
     </LinearLayout>
