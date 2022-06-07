@@ -76,6 +76,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), Settings.class);
                 intent.putExtra("로그아웃","로그아웃완료");
+                intent.putExtra("KakaoID",kakaoID);
                 startActivity(intent);
             }
         });

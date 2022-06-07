@@ -9,6 +9,8 @@ import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.widget.Button;
 import android.widget.LinearLayout;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,10 +28,20 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.kakao.sdk.auth.model.OAuthToken;
 import com.kakao.sdk.common.util.Utility;
 import com.kakao.sdk.user.UserApiClient;
 import com.kakao.sdk.user.model.User;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
@@ -40,6 +52,9 @@ public class Settings extends AppCompatActivity {
     private LinearLayout homeBack;
     Switch switchAlarm;
     LinearLayout logoutButton;
+
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference databaseReference = database.getReference();
 
     HomeActivity homeActivity = (HomeActivity)HomeActivity.homeActivity;
     Car_Select_Activity car_select_activity = (Car_Select_Activity)Car_Select_Activity.carselectActivity;
@@ -60,21 +75,73 @@ public class Settings extends AppCompatActivity {
         switchAlarm = findViewById(R.id.switchAlarm);
         logoutButton = findViewById(R.id.logoutButton);
 
+        String kakaoID = getIntent().getStringExtra("KakaoID");
+
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+        DateFormat dateFormat = new SimpleDateFormat("yyMMdd");
+        Calendar cal2 = Calendar.getInstance();
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("myCh", "My Channel", importance);
+            channel.setDescription("wafafa");
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+
+
+            /*NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+
             NotificationChannel channel = new NotificationChannel("myCh", "My Channel", NotificationManager.IMPORTANCE_DEFAULT);
 
             NotificationManager manager = getSystemService(NotificationManager.class);
-            manager.createNotificationChannel(channel);
+            manager.createNotificationChannel(channel);*/
         }
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "my Ch")
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(Settings.this, "my Ch")
                 .setSmallIcon(android.R.drawable.stat_notify_sync)
                 .setContentTitle("First Notification")
-                .setContentText("This is the Body of message")
-                .setOngoing(true);
+                .setContentText("This is the Body of message");/*
+                .setOngoing(true);*/
 
         notification = builder.build();
-        notificationManagerCompat = NotificationManagerCompat.from(this);
+        notificationManagerCompat = NotificationManagerCompat.from(Settings.this);
+
+        /*switchAlarm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                databaseReference.child("Car_Management").child(kakaoID).child("1").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for(DataSnapshot dataSnapshot : snapshot.child("Supplies").getChildren()) {
+                            for (DataSnapshot dataSnapshot2 : dataSnapshot.getChildren()) {
+                                for (DataSnapshot dataSnapshot3 : dataSnapshot2.getChildren()) {
+                                    double day = 0;
+                                    if (dataSnapshot3.getKey().equals("EngineOil")) {
+                                        cal2.set(2022, Integer.parseInt(dataSnapshot.getKey()) - 1, Integer.parseInt(dataSnapshot2.getKey()));
+                                        day = (cal.getTimeInMillis() - cal2.getTimeInMillis()) / (24 * 60 * 60 * 1000);
+                                        if ((int) (365 - day) == 365) {
+                                            Log.d("regre","gerge");
+
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+
+            }
+        });*/
 
         homeBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,7 +166,7 @@ public class Settings extends AppCompatActivity {
     }
 
     public void push(View view){
-        notificationManagerCompat.notify(0, notification);
+        notificationManagerCompat.notify(1, notification);
     }
 
 }
