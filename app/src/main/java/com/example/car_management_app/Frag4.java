@@ -75,9 +75,9 @@ public class Frag4 extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.activity_tab4_fragment,container,false);
-        /*
+
         //ct = getActivity().getApplicationContext();
-        /*ct = container.getContext();
+        ct = container.getContext();
 
         MapView mapView = new MapView(ct);
 
@@ -116,11 +116,16 @@ public class Frag4 extends Fragment {
                             Log.d("확인",address[1] + address[2]);
                             searchKeyword(address[1] + " "+  address[2] + "정비소", mapView);
                         }
+                        else{
+                            searchKeyword("청주 정비소", mapView);
+                        }
 
                     }
 
                 });
-        *//*
+
+
+        /*
         fusedLocationClient.getCurrentLocation(5, new CancellationToken() {
             @Override
             public boolean isCancellationRequested() {
@@ -244,7 +249,6 @@ public class Frag4 extends Fragment {
                     GetResultClass result = response.body();
                     Log.d("성공", result.toString());
                     MapPOIItem marker = new MapPOIItem();
-                    setMarker(marker, mapView, "36.626093638035876", "127.4633582822321", "임시");
                     for (int i = 0; i < result.documents.size(); i++)
                     {
                         Log.d("성공", result.documents.get(i).getAddress_name());

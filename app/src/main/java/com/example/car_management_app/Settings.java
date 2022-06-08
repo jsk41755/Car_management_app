@@ -102,9 +102,9 @@ public class Settings extends AppCompatActivity {
         }
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(Settings.this, id)
-                .setSmallIcon(android.R.drawable.stat_notify_sync)
-                .setContentTitle("First Notification")
-                .setContentText("This is the Body of message");/*
+                .setSmallIcon(R.drawable.carimg)
+                .setContentTitle("카계부 알림")
+                .setContentText("엔진오일 교체 1주일 전 입니다");/*
                 .setOngoing(true);*/
 
         notification = builder.build();
