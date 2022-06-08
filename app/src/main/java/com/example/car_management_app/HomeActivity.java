@@ -41,13 +41,13 @@ public class HomeActivity extends AppCompatActivity {
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {        //프레그먼트의 부모 노드
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         setVolumeControlStream(R.layout.activity_home);
         homeActivity = HomeActivity.this;
 
-        kakaoID = getIntent().getStringExtra("Name");
+        kakaoID = getIntent().getStringExtra("Name");      //카카오ID에 대한 Intent 값 불러오기
         if(kakaoID != null)
             Log.d("카카오 이름", kakaoID);
 
@@ -60,7 +60,7 @@ public class HomeActivity extends AppCompatActivity {
                 Log.d("임시",kakaoID);
         }
 
-        Bundle kakaoIDbundle = new Bundle();
+        Bundle kakaoIDbundle = new Bundle();    //각 Fragment에 대한 번들 값 넘겨주기
         kakaoIDbundle.putString("Name", kakaoID);
 
         Toolbar mToolbar = (Toolbar) findViewById(R.id.main_toolbar);
@@ -71,7 +71,7 @@ public class HomeActivity extends AppCompatActivity {
 
         settings = findViewById(R.id.settings);
 
-        settings.setOnClickListener(new View.OnClickListener() {
+        settings.setOnClickListener(new View.OnClickListener() {        //셋팅 화면으로 넘기기
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), Settings.class);
@@ -125,9 +125,9 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
-    private void CekSession() {
+    private void CekSession() { //이전 페이지로 넘어가지 않게하는 기능
         Boolean Check = Boolean.valueOf(SharedPrefs2.readSharedSetting(HomeActivity.this, "CaptainCode", "true"));
-
+        //CaptainCode가 true라면 이전 페이지로 넘어가지지 않음.
         Intent introIntent = new Intent(HomeActivity.this, Car_Select_Activity.class);
         introIntent.putExtra("CaptainCode", Check);
         //The Value if you click on Login Activity and Set the value is FALSE and whe false the activity will be visible

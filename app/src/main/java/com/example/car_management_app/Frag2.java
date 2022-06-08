@@ -91,13 +91,13 @@ public class Frag2 extends Fragment {
         Wiper_blade_progress = (ProgressBar) v.findViewById(R.id.Wiper_blade_progress);
         BreakOil_progress = (ProgressBar) v.findViewById(R.id.BreakOil_progress);
 
-        Calendar cal = Calendar.getInstance();
+        Calendar cal = Calendar.getInstance();      //현재시간에 대한 라이브러리 기능
         cal.setTime(new Date());
         DateFormat dateFormat = new SimpleDateFormat("yyMMdd");
         Calendar cal2 = Calendar.getInstance();
 
 
-        imageView2.setOnClickListener(view -> {
+        imageView2.setOnClickListener(view -> {     //프로필 사진 변경
             Intent intent = new Intent();
             intent.setType("image/*");
             intent.setAction(Intent.ACTION_GET_CONTENT);
@@ -105,7 +105,7 @@ public class Frag2 extends Fragment {
         });
 
         databaseReference.child(kakaoID).child("1").child("Car_Information").child("Car_Kinds").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
+            @Override       //차량 정보 선택 분기
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.getValue().equals("쏘렌토")){
                     Car_name.setText("쏘렌토");
@@ -125,13 +125,13 @@ public class Frag2 extends Fragment {
         });
 
         databaseReference.child(kakaoID).child("1").child("Supplies").addValueEventListener(new ValueEventListener() {
-            @Override
+            @Override       //소모품 주체주기에 대한 DB 불러오기 및 함수 계산 후 출력
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     for (DataSnapshot dataSnapshot2 : dataSnapshot.getChildren()) {
                         for (DataSnapshot dataSnapshot3 : dataSnapshot2.getChildren()) {
                             double day = 0;
-                            if(dataSnapshot3.getKey().equals("EngineOil")){
+                            if(dataSnapshot3.getKey().equals("EngineOil")){     //엔진오일에 대한 계산 및 출력
                                 cal2.set(2022, Integer.parseInt(dataSnapshot.getKey())-1, Integer.parseInt(dataSnapshot2.getKey()));
                                 day = (cal.getTimeInMillis() - cal2.getTimeInMillis())/(24*60*60*1000);
                                 EngineOil_filter_progress.setProgress((int) (day/365*100));
@@ -140,7 +140,7 @@ public class Frag2 extends Fragment {
                                 else
                                     EngineOil_Dday.setText( (int)(365-day) + "일 남음(1년 마다 교체)");
                             }
-                            else if(dataSnapshot3.getKey().equals("CoolingWater")){
+                            else if(dataSnapshot3.getKey().equals("CoolingWater")){     //냉각수에 대한 계산 및 출력
                                 cal2.set(2022, Integer.parseInt(dataSnapshot.getKey())-1, Integer.parseInt(dataSnapshot2.getKey()));
                                 day = (cal.getTimeInMillis() - cal2.getTimeInMillis())/(24*60*60*1000);
                                 CoolingWater_progress.setProgress((int) (day/730*100));
@@ -149,7 +149,7 @@ public class Frag2 extends Fragment {
                                 else
                                     CoolingWater_Dday.setText((int)(730-day) + "일 남음(2년 마다 교체)");
                             }
-                            else if(dataSnapshot3.getKey().equals("Wiper_blade")){
+                            else if(dataSnapshot3.getKey().equals("Wiper_blade")){      //와이퍼 블레이드에 대한 계산 및 출력
                                 cal2.set(2022, Integer.parseInt(dataSnapshot.getKey())-1, Integer.parseInt(dataSnapshot2.getKey()));
                                 day = (cal.getTimeInMillis() - cal2.getTimeInMillis())/(24*60*60*1000);
                                 Wiper_blade_progress.setProgress((int) (day/365*100));
@@ -158,7 +158,7 @@ public class Frag2 extends Fragment {
                                 else
                                     Wiper_blade_Dday.setText((int)(365-day) + "일 남음(1년 마다 교체)");
                             }
-                            else if(dataSnapshot3.getKey().equals("Airconditioner_filter")){
+                            else if(dataSnapshot3.getKey().equals("Airconditioner_filter")){        //에어컨 필터에 대한 계산 및 출력
                                 cal2.set(2022, Integer.parseInt(dataSnapshot.getKey())-1, Integer.parseInt(dataSnapshot2.getKey()));
                                 day = (cal.getTimeInMillis() - cal2.getTimeInMillis())/(24*60*60*1000);
                                 Airconditioner_filter_progress.setProgress((int) (day/180*100));
@@ -167,7 +167,7 @@ public class Frag2 extends Fragment {
                                 else
                                     Airconditioner_filter_Dday.setText((int)(180-day) + "일 남음(6개월 마다 교체");
                             }
-                            else if(dataSnapshot3.getKey().equals("BreakOil")){
+                            else if(dataSnapshot3.getKey().equals("BreakOil")){     //브레이크 오일에 대한 계산 및 출력
                                 cal2.set(2022, Integer.parseInt(dataSnapshot.getKey())-1, Integer.parseInt(dataSnapshot2.getKey()));
                                 day = (cal.getTimeInMillis() - cal2.getTimeInMillis())/(24*60*60*1000);
                                 BreakOil_progress.setProgress((int) (day/730*100));
@@ -192,7 +192,7 @@ public class Frag2 extends Fragment {
     }
 
     
-    ActivityResultLauncher<Intent> launcher = registerForActivityResult
+    ActivityResultLauncher<Intent> launcher = registerForActivityResult     //선택 프로필 사진에 대한 Intent 기능
             (new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
                 @Override
                 public void onActivityResult(ActivityResult result)
@@ -209,7 +209,7 @@ public class Frag2 extends Fragment {
                 }
             });
 
-    private void Car_information(String Car_information) {
+    private void Car_information(String Car_information) {      //차량 정보에 대한 출력(DB에서 불러옴)
         car_databaseReference.child(Car_information).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

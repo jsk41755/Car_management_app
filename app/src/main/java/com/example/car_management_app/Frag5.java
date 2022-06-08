@@ -56,10 +56,6 @@ public class Frag5 extends Fragment {
         recyclerView2 = v.findViewById(R.id.recyclerView2);
         recyclerView3 = v.findViewById(R.id.recyclerView3);
 
-
-
-        //LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ct);
-        //recyclerView.setLayoutManager(linearLayoutManager);
         LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(ct);
         horizontalLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView1.setLayoutManager(horizontalLayoutManager);
@@ -72,8 +68,6 @@ public class Frag5 extends Fragment {
         horizontalLayoutManager3.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView3.setLayoutManager(horizontalLayoutManager3);
 
-
-
         adapter = new RecyclerAdapter();
         recyclerView1.setAdapter(adapter);
         adapter2 = new RecyclerAdapter();
@@ -82,7 +76,6 @@ public class Frag5 extends Fragment {
         recyclerView3.setAdapter(adapter3);
 
         getData();
-
 /*
         new Thread() {
             @Override

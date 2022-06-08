@@ -69,7 +69,7 @@ public class Settings extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        String id = "my_channel_01";
+        String id = "my_channel_01";    //외부 알림설정 ID값
 
         LinearLayout homeBack = (LinearLayout) findViewById(R.id.homeBack);
         switchAlarm = findViewById(R.id.switchAlarm);
@@ -77,12 +77,12 @@ public class Settings extends AppCompatActivity {
 
         String kakaoID = getIntent().getStringExtra("KakaoID");
 
-        Calendar cal = Calendar.getInstance();
+        Calendar cal = Calendar.getInstance();      //현재 시간 출력을 위한 라이브러리
         cal.setTime(new Date());
         DateFormat dateFormat = new SimpleDateFormat("yyMMdd");
         Calendar cal2 = Calendar.getInstance();
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {       //Android Oreo버젼에서는 이전과 다르게 Notification 기능을 다르게 해주어야 한다.
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
             NotificationChannel channel = new NotificationChannel(id, "My Channel", importance);
             channel.setDescription("wafafa");
@@ -90,58 +90,15 @@ public class Settings extends AppCompatActivity {
             // or other notification behaviors after this
             NotificationManager manager = getSystemService(NotificationManager.class);
             manager.createNotificationChannel(channel);
-
-
-            /*NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
-
-            NotificationChannel channel = new NotificationChannel("myCh", "My Channel", NotificationManager.IMPORTANCE_DEFAULT);
-
-            NotificationManager manager = getSystemService(NotificationManager.class);
-            manager.createNotificationChannel(channel);*/
         }
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(Settings.this, id)
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(Settings.this, id)      //Notification 알림 객체 생성
                 .setSmallIcon(R.drawable.carimg)
                 .setContentTitle("카계부 알림")
-                .setContentText("엔진오일 교체 1주일 전 입니다");/*
-                .setOngoing(true);*/
+                .setContentText("엔진오일 교체 1주일 전 입니다");
 
         notification = builder.build();
-        notificationManagerCompat = NotificationManagerCompat.from(Settings.this);
-
-        /*switchAlarm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                databaseReference.child("Car_Management").child(kakaoID).child("1").addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        for(DataSnapshot dataSnapshot : snapshot.child("Supplies").getChildren()) {
-                            for (DataSnapshot dataSnapshot2 : dataSnapshot.getChildren()) {
-                                for (DataSnapshot dataSnapshot3 : dataSnapshot2.getChildren()) {
-                                    double day = 0;
-                                    if (dataSnapshot3.getKey().equals("EngineOil")) {
-                                        cal2.set(2022, Integer.parseInt(dataSnapshot.getKey()) - 1, Integer.parseInt(dataSnapshot2.getKey()));
-                                        day = (cal.getTimeInMillis() - cal2.getTimeInMillis()) / (24 * 60 * 60 * 1000);
-                                        if ((int) (365 - day) == 365) {
-                                            Log.d("regre","gerge");
-
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-
-
-            }
-        });*/
+        notificationManagerCompat = NotificationManagerCompat.from(Settings.this);  //Notification 빌드.
 
         homeBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -150,7 +107,7 @@ public class Settings extends AppCompatActivity {
             }
         });
 
-        logoutButton.setOnClickListener(new View.OnClickListener() {
+        logoutButton.setOnClickListener(new View.OnClickListener() {        //로그아웃 기능(LoginActivity에서 Setting 액티비티로 기능 옮김.)
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Settings.this, HomeActivity.class);
@@ -167,6 +124,6 @@ public class Settings extends AppCompatActivity {
 
     public void push(View view){
         notificationManagerCompat.notify(1, notification);
-    }
+    }   //알림 Swith를 On 했을때, 알림 기능 Notification을 실행 해줌.
 
 }

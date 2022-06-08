@@ -10,5 +10,6 @@ public class KakaoApplication extends Application {
         super.onCreate();
 
         KakaoSdk.init(this, "88af6b217bb2b94784fd9106a2587250");
+        //정승규 기준 kakao appKey
     }
 }

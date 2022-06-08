@@ -3,7 +3,7 @@ package com.example.car_management_app;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-public class SharedPrefs {
+public class SharedPrefs {      //CaptainCode가 true일 때, 이전 화면을 안보여주게 하는 기능 (로그인 부분)
 
     final static String FileName = "CaptainCode";
 

@@ -95,7 +95,7 @@ public class Frag3 extends Fragment {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = database.getInstance().getReference("Car_Management");
 
-        long now = System.currentTimeMillis();
+        long now = System.currentTimeMillis();      //현재 시각 라이브러리 함수 기능
         Date date = new Date(now);
         SimpleDateFormat sdf = new SimpleDateFormat("MM월dd일");
         SimpleDateFormat month = new SimpleDateFormat("MM");
@@ -107,10 +107,10 @@ public class Frag3 extends Fragment {
 
         time.setText(getTime);
 
-        initspinnerfooter();
+        initspinnerfooter();    //네비게이션뷰에 대한 목록들에 대한 함수 호출
 
         Log.d("카카오","시간체크3");
-        button.setOnClickListener(new View.OnClickListener() {
+        button.setOnClickListener(new View.OnClickListener() {     //소모품에 대한 해당 지출 날짜 선택
             @Override
             public void onClick(View view) {
                 edittext = Integer.parseInt(editText.getText().toString());
@@ -128,8 +128,8 @@ public class Frag3 extends Fragment {
                         tableRow.setLayoutParams(new TableRow.LayoutParams(
                                 ViewGroup.LayoutParams.WRAP_CONTENT,
                                 ViewGroup.LayoutParams.WRAP_CONTENT));
-
-                        for(int j = 0; j < 3; j++){
+                        //이번 달에 소모품 지출 내역이 있을 때 테이블 추가
+                        for(int j = 0; j < 3; j++){ //각 소모품에 맞는 이름 출력
                             if(j == 0) {
                                 TextView textView = new TextView(v.getContext());
                                 textView.setText(snapshot.getKey() + " " + dataSnapshot.getKey());
@@ -174,7 +174,7 @@ public class Frag3 extends Fragment {
                                 tableRow.addView(textView);
                             }
 
-                            if(tableRow.getParent() != null)
+                            if(tableRow.getParent() != null)     //*경고* Fragment 단위에서 getParent를 통해 부모를 결정해주어야함
                                 ((ViewGroup) tableRow.getParent()).removeView(tableRow);
                             tableLayout.addView(tableRow);
                         }
@@ -188,7 +188,7 @@ public class Frag3 extends Fragment {
             }
         });
 
-        databaseReference.child(kakaoID).child("1").child("Supplies").addValueEventListener(new ValueEventListener() {
+        databaseReference.child(kakaoID).child("1").child("Supplies").addValueEventListener(new ValueEventListener() {  //소모품에 관한 통계 (BarChart)
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 visitors.clear();
@@ -260,7 +260,7 @@ public class Frag3 extends Fragment {
     }
 
 
-    private void initspinnerfooter() {
+    private void initspinnerfooter() {  //네비게이션뷰에 대한 목록들에 대한 함수 호출
         String[] items = new String[]{"엔진오일","세차","냉각수","와이퍼 블레이드","에어컨 필터","브레이크 오일"};
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, items);

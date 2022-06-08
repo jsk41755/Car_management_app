@@ -57,11 +57,9 @@ public class Car_Number_Reigst extends AppCompatActivity {
             );
         }
 
-        Log.d("adapter", String.valueOf(adapter.getItem(1)));
-
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_item);      //adapter와 item 연결.
         Car_Kinds_Select.setAdapter(adapter);
-        Car_Kinds_Select.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        Car_Kinds_Select.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {       //자동차 종류를 선택했을 때
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 Spinner_text = Car_Kinds_Select.getSelectedItem().toString();
@@ -73,7 +71,7 @@ public class Car_Number_Reigst extends AppCompatActivity {
             }
         });
 
-        CarNum_button.setOnClickListener(new View.OnClickListener() {
+        CarNum_button.setOnClickListener(new View.OnClickListener() {       //자동차 정보 등록 버튼을 눌렀을 때 DB 등록
             @Override
             public void onClick(View view) {
                 CarNum = CarNum_Edit.getText().toString();

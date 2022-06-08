@@ -76,15 +76,12 @@ public class Frag4 extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.activity_tab4_fragment,container,false);
 
-        //ct = getActivity().getApplicationContext();
         ct = container.getContext();
 
         MapView mapView = new MapView(ct);
 
         ViewGroup mapViewContainer = (ViewGroup) v.findViewById(R.id.map_view);
         mapViewContainer.addView(mapView);
-        //
-        //
 
 
         if (!checkLocationServicesStatus()){

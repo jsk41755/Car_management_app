@@ -46,11 +46,8 @@ public class Car_Select_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_car_select);
         carselectActivity = Car_Select_Activity.this;
         kakaoID = getIntent().getStringExtra("Name");
-        //updateKakaoLoginUi();
 
-        //isSelect();
-
-        Function2<OAuthToken, Throwable, Unit> callback = new Function2<OAuthToken, Throwable, Unit>() {
+        Function2<OAuthToken, Throwable, Unit> callback = new Function2<OAuthToken, Throwable, Unit>() {    //카카오 정보 불러오는 함수
             @Override
             public Unit invoke(OAuthToken oAuthToken, Throwable throwable) {
                 if(oAuthToken != null){
@@ -60,7 +57,6 @@ public class Car_Select_Activity extends AppCompatActivity {
                 if(throwable != null){
                     //TBD
                 }
-                //updateKakaoLoginUi();
                 return null;
             }
         };
@@ -84,13 +80,12 @@ public class Car_Select_Activity extends AppCompatActivity {
         CekSession();
     }
 
-    private void isSelect() {
+    private void isSelect() {       //차량 선택
 
         databaseReference.child("Car_Management").child(kakaoID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String value = dataSnapshot.getValue(String.class);
-                Log.d("qadq", value); // 에러문 출력
 
             }
 
@@ -101,18 +96,17 @@ public class Car_Select_Activity extends AppCompatActivity {
         });
     }
 
-    private void updateKakaoLoginUi() {
+    private void updateKakaoLoginUi() {     //카카오 정보 업데이트
         UserApiClient.getInstance().me(new Function2<User, Throwable, Unit>() {
             @Override
             public Unit invoke(User user, Throwable throwable) {
                 if(user != null){
-                    /*
                     Log.i(TAG, "invoke: id=" + user.getKakaoAccount().getProfile().getNickname());
                     Log.i(TAG, "invoke: email=" + user.getKakaoAccount().getEmail());
                     Log.i(TAG, "invoke: nickname=" + user.getKakaoAccount().getProfile().getNickname());
                     Log.i(TAG, "invoke: gender=" + user.getKakaoAccount().getGender());
                     Log.i(TAG, "invoke: age=" + user.getKakaoAccount().getAgeRange());
-                    */
+
 
                     kakaoID = user.getKakaoAccount().getProfile().getNickname();
 
@@ -131,7 +125,7 @@ public class Car_Select_Activity extends AppCompatActivity {
         });
     }
 
-    private void CekSession() {
+    private void CekSession() {     //로그인이 되어있을 때, 액티비티를 넘어가주는 기능
         Boolean Check = Boolean.valueOf(SharedPrefs.readSharedSetting(Car_Select_Activity.this, "CaptainCode", "true"));
 
         Intent introIntent = new Intent(Car_Select_Activity.this, LoginActivity.class);
@@ -145,7 +139,7 @@ public class Car_Select_Activity extends AppCompatActivity {
         } //If no the Main Activity not Do Anything
     }
 
-    public void CarSelect(boolean isSelect, String Oil){
+    public void CarSelect(boolean isSelect, String Oil){        //차량 선택 DB 업데이트
         Car_Select_Helper car_select = new Car_Select_Helper(isSelect, Oil);
 
         databaseReference.child("Car_Management").child(kakaoID).child("1").child("Oil").setValue(Oil);

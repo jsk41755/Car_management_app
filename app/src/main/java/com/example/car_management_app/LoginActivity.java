@@ -42,7 +42,7 @@ public class LoginActivity extends AppCompatActivity {
 
         Intent logoutintent = getIntent();
         Boolean logoutstatus = logoutintent.getBooleanExtra("로그아웃", false);
-        if(logoutstatus != null)
+        if(logoutstatus != null)//로그인 상태라면 해당 기능 호출
         {
             Log.d("로그아웃6",logoutstatus.toString());
             if(logoutstatus){
@@ -58,7 +58,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
         else{
-            updateKakaoLoginUi();
+            updateKakaoLoginUi(); //로그인 상태가 아니라면 로그인 기능 실행
         }
 
         Log.d("카카오", "시간체크");
@@ -68,7 +68,7 @@ public class LoginActivity extends AppCompatActivity {
         nickName = findViewById(R.id.nickname);
 
 
-        Function2<OAuthToken, Throwable, Unit> callback = new Function2<OAuthToken, Throwable, Unit>() {
+        Function2<OAuthToken, Throwable, Unit> callback = new Function2<OAuthToken, Throwable, Unit>() {    //카카오 정보 업데이트
             @Override
             public Unit invoke(OAuthToken oAuthToken, Throwable throwable) {
                 if(oAuthToken != null){
@@ -83,7 +83,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         };
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
+        loginButton.setOnClickListener(new View.OnClickListener() { //로그인 버튼 눌렀을 때,
             @Override
             public void onClick(View view) {
                 if(UserApiClient.getInstance().isKakaoTalkLoginAvailable(LoginActivity.this)){
@@ -97,7 +97,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        logoutButton.setOnClickListener(new View.OnClickListener() {
+        logoutButton.setOnClickListener(new View.OnClickListener() {    //로그아웃 버튼 현재 쓰이지 않음. -> 설정 화면에서 로그아웃 기능 구현
             @Override
             public void onClick(View view) {
                 UserApiClient.getInstance().logout(new Function1<Throwable, Unit>() {
@@ -113,19 +113,19 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private void updateKakaoLoginUi() {
+    private void updateKakaoLoginUi() { //카카오 정보 로그인 업데이트 함수
         UserApiClient.getInstance().me(new Function2<User, Throwable, Unit>() {
             @Override
             public Unit invoke(User user, Throwable throwable) {
                 if(user != null){
                     SharedPrefs.saveSharedSetting(LoginActivity.this, "CaptainCode", "false");
-                    /*
+
                     Log.i(TAG, "invoke: id=" + user.getId());
                     Log.i(TAG, "invoke: email=" + user.getKakaoAccount().getEmail());
                     Log.i(TAG, "invoke: nickname=" + user.getKakaoAccount().getProfile().getNickname());
                     Log.i(TAG, "invoke: gender=" + user.getKakaoAccount().getGender());
                     Log.i(TAG, "invoke: age=" + user.getKakaoAccount().getAgeRange());
-                    */
+
                     nickName.setText(user.getKakaoAccount().getProfile().getNickname());
 
 

@@ -77,7 +77,7 @@ public class Frag1 extends Fragment {
         getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         View v=inflater.inflate(R.layout.activity_tab1_fragment,container,false);
         ct = container.getContext();
-        Bundle kakaoIDbundle = getArguments();
+        Bundle kakaoIDbundle = getArguments();      // 번들 Value값 불러오기
         kakaoID = kakaoIDbundle.getString("Name");
         textEdit = v.findViewById(R.id.editTextTextPersonName2);
 
@@ -93,7 +93,7 @@ public class Frag1 extends Fragment {
         DriveLayout2 = v.findViewById(R.id.DriveLayout2);
         DriveLayout3 = v.findViewById(R.id.DriveLayout3);
 
-        Calendar cal = Calendar.getInstance();
+        Calendar cal = Calendar.getInstance();      //날짜 불러오기에 대한 라이브러리 기능
         cal.setTime(new Date());
         DateFormat dateFormat = new SimpleDateFormat("yyMMdd");
         Calendar cal2 = Calendar.getInstance();
@@ -101,6 +101,7 @@ public class Frag1 extends Fragment {
         String[][] NumList = {{"drive1_1","drive1_2","drive1_3"},{"drive2_1","drive2_2"},{"drive3_1","drive3_2","drive3_3"},{"drive4_1","drive4_2","drive4_3"},{"drive5_1","drive5_2"},
                 {"drive6_1","drive6_2","drive6_3"}};
 
+        //교통 법규에 대한 리스트 목록 추가
         Quote_list.add("자동차 정기 검사 언제 해야 할까?");
         Quote_list.add("자동차 검사를 받지 않는다면?");
         Quote_list.add("자동차 검사 수수료는 얼마인가요?");
@@ -108,7 +109,7 @@ public class Frag1 extends Fragment {
         Quote_list.add("졸음운전은 음주운전과도 같다?!");
         Quote_list.add("방향지시등 점등하셨나요? \n깜빡이를 잊지 말아주세요.");
 
-
+        //교통 법규에 내용 랜덤으로 출력
         for(int i = 0 ; i < 3 ; i++) {
             randomNum[i]= random.nextInt(max_num_value - min_num_value + 1) + min_num_value;
             for(int j=0;j<i;j++)
@@ -126,7 +127,7 @@ public class Frag1 extends Fragment {
         Drive_tip2.setText(Quote_list.get(randomNum[1]).toString());
         Drive_tip3.setText(Quote_list.get(randomNum[2]).toString());
 
-        DriveLayout1.setOnClickListener(new View.OnClickListener() {
+        DriveLayout1.setOnClickListener(new View.OnClickListener() {        //교통법규 1번을 눌렀을 때
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder dlg = new AlertDialog.Builder(ct);
@@ -137,14 +138,14 @@ public class Frag1 extends Fragment {
                 dlg.show();
 
                 List<SlideModel> slideModels = new ArrayList<>();
-                if(randomNum[0] == 0 || randomNum[0] == 2 || randomNum[0] == 3 || randomNum[0] == 5){
+                if(randomNum[0] == 0 || randomNum[0] == 2 || randomNum[0] == 3 || randomNum[0] == 5){   //내용이 3장일 때,
                     for(int i = 0; i<3; i++){
                         pop = NumList[randomNum[0]][i];
                         slideModels.add(new SlideModel(getResources().getIdentifier(pop,"drawable", ct.getPackageName()), ScaleTypes.CENTER_CROP));
                     }
                 }
                 else{
-                    for(int i = 0; i<2; i++){
+                    for(int i = 0; i<2; i++){      //내용이 2장일 때,
                         pop = NumList[randomNum[0]][i];
                         slideModels.add(new SlideModel(getResources().getIdentifier(pop,"drawable", ct.getPackageName()), ScaleTypes.CENTER_CROP));
                     }
@@ -157,7 +158,7 @@ public class Frag1 extends Fragment {
             }
         });
 
-        DriveLayout2.setOnClickListener(new View.OnClickListener() {
+        DriveLayout2.setOnClickListener(new View.OnClickListener() {        //교통법규 2번을 눌렀을 때
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder dlg = new AlertDialog.Builder(ct);
@@ -168,14 +169,14 @@ public class Frag1 extends Fragment {
                 dlg.show();
 
                 List<SlideModel> slideModels = new ArrayList<>();
-                if(randomNum[1] == 0 || randomNum[1] == 2 || randomNum[1] == 3 || randomNum[1] == 5){
+                if(randomNum[1] == 0 || randomNum[1] == 2 || randomNum[1] == 3 || randomNum[1] == 5){      //내용이 3장일 때,
                     for(int i = 0; i<3; i++){
                         pop = NumList[randomNum[1]][i];
                         slideModels.add(new SlideModel(getResources().getIdentifier(pop,"drawable", ct.getPackageName()), ScaleTypes.CENTER_CROP));
                     }
                 }
                 else{
-                    for(int i = 0; i<2; i++){
+                    for(int i = 0; i<2; i++){          //내용이 2장일 때,
                         pop = NumList[randomNum[1]][i];
                         slideModels.add(new SlideModel(getResources().getIdentifier(pop,"drawable", ct.getPackageName()), ScaleTypes.CENTER_CROP));
                     }
@@ -185,7 +186,7 @@ public class Frag1 extends Fragment {
             }
         });
 
-        DriveLayout3.setOnClickListener(new View.OnClickListener() {
+        DriveLayout3.setOnClickListener(new View.OnClickListener() {        //교통법규 3번을 눌렀을 때
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder dlg = new AlertDialog.Builder(ct);
@@ -196,14 +197,14 @@ public class Frag1 extends Fragment {
                 dlg.show();
 
                 List<SlideModel> slideModels = new ArrayList<>();
-                if(randomNum[2] == 0 || randomNum[2] == 2 || randomNum[2] == 3 || randomNum[2] == 5){
+                if(randomNum[2] == 0 || randomNum[2] == 2 || randomNum[2] == 3 || randomNum[2] == 5){      //내용이 3장일 때,
                     for(int i = 0; i<3; i++){
                         pop = NumList[randomNum[2]][i];
                         slideModels.add(new SlideModel(getResources().getIdentifier(pop,"drawable", ct.getPackageName()), ScaleTypes.CENTER_CROP));
                     }
                 }
                 else{
-                    for(int i = 0; i<2; i++){
+                    for(int i = 0; i<2; i++){          //내용이 2장일 때,
                         pop = NumList[randomNum[2]][i];
                         slideModels.add(new SlideModel(getResources().getIdentifier(pop,"drawable", ct.getPackageName()), ScaleTypes.CENTER_CROP));
                     }
@@ -213,13 +214,13 @@ public class Frag1 extends Fragment {
             }
         });
 
-        databaseReference.child("Car_Management").child(kakaoID).child("1").addValueEventListener(new ValueEventListener() {
+        databaseReference.child("Car_Management").child(kakaoID).child("1").addValueEventListener(new ValueEventListener() {    //최상단 정보 DB 불러오기
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 TempText = snapshot.child("memo").getValue(String.class);
                 textEdit.setText(TempText);
 
-                if(snapshot.child("Car_Information").child("Car_Kinds").getValue().equals("쏘렌토")){
+                if(snapshot.child("Car_Information").child("Car_Kinds").getValue().equals("쏘렌토")){  //프로필 이미지 출력
                     Car_name_st = "Audi.png";
                 }
                 else{
@@ -227,7 +228,7 @@ public class Frag1 extends Fragment {
                 }
                 Car_information(Car_name_st);
 
-                for(DataSnapshot dataSnapshot : snapshot.child("Supplies").getChildren()) {
+                for(DataSnapshot dataSnapshot : snapshot.child("Supplies").getChildren()) {     //각종 차량 소모품에 대한 교체주기 출력
                     for (DataSnapshot dataSnapshot2 : dataSnapshot.getChildren()) {
                         for (DataSnapshot dataSnapshot3 : dataSnapshot2.getChildren()) {
                             double day = 0;
@@ -260,7 +261,7 @@ public class Frag1 extends Fragment {
             }
         });
 
-        textEdit.addTextChangedListener(new TextWatcher() {
+        textEdit.addTextChangedListener(new TextWatcher() {     //실시간 메모 기능
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -281,7 +282,7 @@ public class Frag1 extends Fragment {
         return v;
     }
 
-    private void Car_information(String car_name_st) {
+    private void Car_information(String car_name_st) {      //프로필 사진 출력 함수 (파이어베이스 Storage -> 사진 불러오기)
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageReference = storage.getReference();
         StorageReference pathReference = storageReference.child(car_name_st);
