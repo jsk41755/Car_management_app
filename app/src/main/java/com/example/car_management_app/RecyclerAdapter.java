@@ -62,18 +62,19 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemVi
         private ImageView itemImg;
 
 
+
         public ItemViewHolder(@NonNull View itemView) {
             super(itemView);
             itemName = itemView.findViewById(R.id.itemName);
             itemCost = itemView.findViewById(R.id.itemCost);
             itemImg = itemView.findViewById(R.id.imageView);
 
-            itemImg.setOnClickListener(new View.OnClickListener() {
+                    itemImg.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     AlertDialog.Builder dlg = new AlertDialog.Builder(ct);
-                    dlg.setTitle(R.string.tip2);
-                    dlg.setView(R.layout.tip_activity);
+                    dlg.setTitle("다른 사이트와의 비교(오토워시)");
+                    dlg.setView(R.layout.wash_cost);
                     dlg.setPositiveButton("닫기", null);
                     dlg.show();
                 }

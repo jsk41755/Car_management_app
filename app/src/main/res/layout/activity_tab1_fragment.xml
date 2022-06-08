@@ -32,7 +32,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="start"
-                android:text="My Car"
+                android:text="빠방이"
                 android:textSize="20dp"
                 android:textColor="@color/black"
                 android:fontFamily="@font/hallymgothic_medium"
