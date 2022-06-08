@@ -84,7 +84,7 @@ public class Settings extends AppCompatActivity {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel("myCh", "My Channel", importance);
+            NotificationChannel channel = new NotificationChannel(id, "My Channel", importance);
             channel.setDescription("wafafa");
             // Register the channel with the system; you can't change the importance
             // or other notification behaviors after this
@@ -101,7 +101,7 @@ public class Settings extends AppCompatActivity {
             manager.createNotificationChannel(channel);*/
         }
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(Settings.this, "my Ch")
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(Settings.this, id)
                 .setSmallIcon(android.R.drawable.stat_notify_sync)
                 .setContentTitle("First Notification")
                 .setContentText("This is the Body of message");/*
