@@ -116,6 +116,9 @@ public class Frag4 extends Fragment {
                             Log.d("확인",address[1] + address[2]);
                             searchKeyword(address[1] + " "+  address[2] + "정비소", mapView);
                         }
+                        else{
+                            searchKeyword("청주 정비소", mapView);
+                        }
 
                     }
 
@@ -244,7 +247,6 @@ public class Frag4 extends Fragment {
                     GetResultClass result = response.body();
                     Log.d("성공", result.toString());
                     MapPOIItem marker = new MapPOIItem();
-                    setMarker(marker, mapView, "36.626093638035876", "127.4633582822321", "임시");
                     for (int i = 0; i < result.documents.size(); i++)
                     {
                         Log.d("성공", result.documents.get(i).getAddress_name());
