@@ -59,11 +59,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Frag4 extends Fragment {
 
-    String BASE_URL = "https://dapi.kakao.com/";
-    String KakaoAK = "KakaoAK 81bb49d29320f177f9d28498acbe9a28";
+    String BASE_URL = "https://dapi.kakao.com/";  // 카카오 REST API 가져올 사이트 주소
+    String KakaoAK = "KakaoAK 81bb49d29320f177f9d28498acbe9a28"; // 카카오 MAP 네이티브 API 앱 키
 
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
     private static final int PERMISSIONS_REQUEST_CODE = 100;
+
+    //위치 퍼미션 수락하기 위한 용도
     String[] REQUIRED_PERMISSIONS = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
 
     private FusedLocationProviderClient fusedLocationClient;
@@ -78,32 +80,34 @@ public class Frag4 extends Fragment {
 
         ct = container.getContext();
 
+        //카카오 맵 뷰 출력
         MapView mapView = new MapView(ct);
 
         ViewGroup mapViewContainer = (ViewGroup) v.findViewById(R.id.map_view);
         mapViewContainer.addView(mapView);
 
-
+        // 위치 권한 확인 및 수락
         if (!checkLocationServicesStatus()){
-            showDialogForLocationServiceSetting();}
+            showDialogForLocationServiceSetting();} //위치 권한 확인 다이얼로그 출력
         else{
-            checkRunTimePermission(mapView);
+            checkRunTimePermission(mapView); // 퍼미션 확인
         }
 
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(ct);
-        fusedLocationClient.getLastLocation()
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(ct); //현재 위치 받아들이기
+        fusedLocationClient.getLastLocation() // 마지막으로 저장된 위치 받아들이기
                 .addOnSuccessListener(getActivity(), new OnSuccessListener<Location>() {
                     @Override
-                    public void onSuccess(Location location) {
+                    public void onSuccess(Location location) { //마지막 위치 받아들이는거 성공시
                         // Got last known location. In some rare situations this can be null.
                         if (location != null) {
 
-                            double currLat = location.getLatitude();
-                            double currLon = location.getLongitude();
+                            double currLat = location.getLatitude(); //현재 위치 위도 알아오기
+                            double currLon = location.getLongitude(); //현재 위치 경도 알아오기
                             String cur_address = getCurrentAddress(currLat, currLon);
 
                             String[] address = cur_address.split("\\s");
 
+                            //현재 위치 표시하기
                             mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(currLat, currLon), true);
                             mapView.setZoomLevel(4, true);
                             startMarker(mapView, currLat, currLon);
@@ -111,9 +115,13 @@ public class Frag4 extends Fragment {
                             MapPoint mapPoint = mapView.getMapCenterPoint();
                             MapPoint.GeoCoordinate curMappoint = mapPoint.getMapPointGeoCoord();
                             Log.d("확인",address[1] + address[2]);
+                            
+                            // 현재 위치 기반 키워드로 근처 정비소 장소 알아오기 
                             searchKeyword(address[1] + " "+  address[2] + "정비소", mapView);
                         }
                         else{
+                            
+                            //현재 위치 알아오는것 실패할 시 default 값으로 알아오기
                             searchKeyword("청주 정비소", mapView);
                         }
 
@@ -122,7 +130,7 @@ public class Frag4 extends Fragment {
                 });
 
 
-        /*
+        /* 다른 방법으로 현재 위치 알아오기 2
         fusedLocationClient.getCurrentLocation(5, new CancellationToken() {
             @Override
             public boolean isCancellationRequested() {
@@ -157,7 +165,8 @@ public class Frag4 extends Fragment {
         });
          *//*
 
-        *//*
+        */
+        /* 다른 방법으로 현재 위치 알아오기 3
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 //마지막 위치 받아오기
         Location loc_Current = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
@@ -199,7 +208,8 @@ public class Frag4 extends Fragment {
          *//**/
         return v;
     }
-
+    
+    //퍼미션 확인
     public void checkRunTimePermission(MapView mapView) {
         int hasFineLocationPermission = ContextCompat.checkSelfPermission(ct,Manifest.permission.ACCESS_FINE_LOCATION);
         if (hasFineLocationPermission == PackageManager.PERMISSION_GRANTED){
@@ -213,6 +223,7 @@ public class Frag4 extends Fragment {
         }
     }
 
+    //위치 권한 확인하는 다이얼로그 출력
     private void showDialogForLocationServiceSetting(){
         AlertDialog.Builder builder = new AlertDialog.Builder(ct);
         builder.setTitle("위치 서비스 비활성화");
@@ -228,6 +239,7 @@ public class Frag4 extends Fragment {
         builder.create().show();
     }
 
+    //현재 서비스 상태 체크하기
     public boolean checkLocationServicesStatus() {
         LocationManager locationManager = (LocationManager) ct.getSystemService(LOCATION_SERVICE);
 
@@ -235,6 +247,7 @@ public class Frag4 extends Fragment {
                 || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
     }
 
+    //키워드로 주변 장소 이름 검색 및 경도 위도 알아오기
     private void searchKeyword(String keyword, MapView mapView){
         //키워드로 찾기
         Call<GetResultClass> call = RetrofitNet.getRetrofit().getService().getDocuments(KakaoAK, keyword);
@@ -286,7 +299,7 @@ public class Frag4 extends Fragment {
 
         mapView.addPOIItem(marker);
     }
-
+    //현재 내 위치 마커로 표시하기
     public void startMarker(MapView mapView, double x, double y)
     {
         MapPoint mapPoint = MapPoint.mapPointWithGeoCoord(x,y);
@@ -301,7 +314,7 @@ public class Frag4 extends Fragment {
 
         mapView.addPOIItem(marker);
     }
-
+    // 현재 주소 알아오기
     public String getCurrentAddress( double latitude, double longitude) {
 
         //지오코더... GPS를 주소로 변환

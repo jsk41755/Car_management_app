@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+//카카오맵 REST API를 통해 가져온 값 저장하기
 public class GetResultClass {
     @SerializedName("meta")
     @Expose

@@ -56,6 +56,7 @@ public class Frag5 extends Fragment {
         recyclerView2 = v.findViewById(R.id.recyclerView2);
         recyclerView3 = v.findViewById(R.id.recyclerView3);
 
+        //수평으로 레이아웃 배열시키기
         LinearLayoutManager horizontalLayoutManager = new LinearLayoutManager(ct);
         horizontalLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         recyclerView1.setLayoutManager(horizontalLayoutManager);
@@ -75,6 +76,7 @@ public class Frag5 extends Fragment {
         adapter3 = new RecyclerAdapter();
         recyclerView3.setAdapter(adapter3);
 
+        //데이터 가져오기
         getData();
 /*
         new Thread() {
@@ -116,11 +118,13 @@ public class Frag5 extends Fragment {
 
         return v;
     }
+    //아이템 가져오기
     private void getData(){
         ItemJsoup jsoupAsyncTask = new ItemJsoup();
         jsoupAsyncTask.execute();
     }
 
+    //아이템 형식에 맞게 저장시키기
     private class ItemJsoup extends AsyncTask<Void, Void, Void> {
         ArrayList<String> listName = new ArrayList<>();
         ArrayList<String> listCost = new ArrayList<>();
@@ -131,6 +135,8 @@ public class Frag5 extends Fragment {
         ArrayList<String> listName3 = new ArrayList<>();
         ArrayList<String> listCost3 = new ArrayList<>();
         ArrayList<String> listUrl3 = new ArrayList<>();
+
+        //백그라운드로 실행시켜 각 리스트에 값 넣기
         @Override
         protected Void doInBackground(Void... voids) {
             try {
@@ -160,6 +166,7 @@ Handler handler = new Handler(){
 
 
      */
+    //크롤링을 통해 사이트에서 html 분석해 가져오기
     public void crawling(Document tempdoc, ArrayList<String> templistName, ArrayList<String> templistCost,
                          ArrayList<String> templistUrl, RecyclerAdapter temp){
         final Elements name_list = tempdoc.select(".item_tit_box");
@@ -170,14 +177,15 @@ Handler handler = new Handler(){
         handler.post(new Runnable() {
             @Override
             public void run() {
+                //이름 넣기
                 for (Element element : name_list) {
                     templistName.add(element.text());
                 }
-
+                //가격 넣기
                 for (Element element : cost_list) {
                     templistCost.add(element.text());
                 }
-
+                //이미지 넣기
                 for (Element element : image_list){
                     templistUrl.add(element.attr("src"));
                 }

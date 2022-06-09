@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Car_Management_App</string>
+    <string name="app_name">카계부</string>
 
     <string name="tip1">자동차 정기 검사 언제 해야 할까?</string>
     <string name="tip2">자동차 검사를 받지 않는다면?</string>

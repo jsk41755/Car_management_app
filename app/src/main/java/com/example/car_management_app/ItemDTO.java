@@ -1,5 +1,6 @@
 package com.example.car_management_app;
 
+//세차 용품 사이트에서 크롤링하여 가져온 값 저장하기
 public class ItemDTO {
     private String itemName;
     private String itemCost;
